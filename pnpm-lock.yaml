@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/sora':
+        specifier: ^5.2.6
+        version: 5.2.6
       '@remixicon/react':
         specifier: ^4.6.0
         version: 4.6.0(react@19.1.0)
@@ -23,6 +26,9 @@ importers:
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
+      react-router:
+        specifier: ^7.6.3
+        version: 7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       tailwind-variants:
         specifier: ^1.0.0
         version: 1.0.0(tailwindcss@4.1.11)
@@ -446,6 +452,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource-variable/sora@5.2.6':
+    resolution: {integrity: sha512-9cVxKZXAdZIsPfCV+/dIn5zbvmAhXiqNXZdh2454n7Dk7U7nQ9ZfQuh2Q/De/qgzSUwQldTLlHMzgJ3OtOt67w==}
 
   '@ianvs/prettier-plugin-sort-imports@4.4.2':
     resolution: {integrity: sha512-KkVFy3TLh0OFzimbZglMmORi+vL/i2OFhEs5M07R9w0IwWAGpsNNyE4CY/2u0YoMF5bawKC2+8/fUH60nnNtjw==}
@@ -1229,6 +1238,10 @@ packages:
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
+
+  cookie@1.0.2:
+    resolution: {integrity: sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==}
+    engines: {node: '>=18'}
 
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
@@ -2456,6 +2469,16 @@ packages:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
 
+  react-router@7.6.3:
+    resolution: {integrity: sha512-zf45LZp5skDC6I3jDLXQUu0u26jtuP4lEGbc7BbdyxenBN1vJSTA18czM2D+h5qyMBuMrD+9uB+mU37HIoKGRA==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+
   react@19.1.0:
     resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
     engines: {node: '>=0.10.0'}
@@ -2573,6 +2596,9 @@ packages:
     resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
     engines: {node: '>=10'}
     hasBin: true
+
+  set-cookie-parser@2.7.1:
+    resolution: {integrity: sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==}
 
   set-value@4.1.0:
     resolution: {integrity: sha512-zTEg4HL0RwVrqcWs3ztF+x1vkxfm0lP+MQQFPiMJTKVceBwEV0A569Ou8l9IYQG8jOZdMVI1hGsc0tmeD2o/Lw==}
@@ -3483,6 +3509,8 @@ snapshots:
   '@esbuild/win32-x64@0.25.6':
     optional: true
 
+  '@fontsource-variable/sora@5.2.6': {}
+
   '@ianvs/prettier-plugin-sort-imports@4.4.2(prettier@3.6.2)':
     dependencies:
       '@babel/generator': 7.28.0
@@ -4260,6 +4288,8 @@ snapshots:
       split2: 4.2.0
 
   convert-source-map@2.0.0: {}
+
+  cookie@1.0.2: {}
 
   core-util-is@1.0.3: {}
 
@@ -5388,6 +5418,14 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
+  react-router@7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      cookie: 1.0.2
+      react: 19.1.0
+      set-cookie-parser: 2.7.1
+    optionalDependencies:
+      react-dom: 19.1.0(react@19.1.0)
+
   react@19.1.0: {}
 
   readable-stream@2.3.8:
@@ -5512,6 +5550,8 @@ snapshots:
   semver@6.3.1: {}
 
   semver@7.7.2: {}
+
+  set-cookie-parser@2.7.1: {}
 
   set-value@4.1.0:
     dependencies:
