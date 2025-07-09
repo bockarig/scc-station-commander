@@ -251,3 +251,20 @@
   --bg-danger-bold-hover: #b80014;
   --bg-danger-bold-pressed: #a30011;
 }
+
+/* * * * * * * * * * * * * * * * * * * */
+/*                                     */
+/*          Panel background           */
+/*                                     */
+/* * * * * * * * * * * * * * * * * * * */
+
+.creightit {
+  &:where([data-panel-background='solid']) {
+    --ds-panel: var(--ds-panel-solid);
+    --backdrop-filter-panel: none;
+  }
+  &:where([data-panel-background='translucent']) {
+    --ds-panel: var(--ds-panel-translucent);
+    --backdrop-filter-panel: blur(64px);
+  }
+}
