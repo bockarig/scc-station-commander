@@ -1,5 +1,6 @@
 import background from '@/extension/background'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+// @ts-ignore
 import type { Runtime } from 'wxt/browser'
 import { fakeBrowser } from 'wxt/testing'
 
