@@ -1,3 +1,104 @@
+/* 
+ * Local Sora Font Face Declarations
+ * Using local font files instead of Fontsource package
+ */
+
+/* Sora Variable Font - Modern browsers with variable font support */
+@font-face {
+  font-family: 'Sora Variable';
+  src: url('../../fonts/Sora/Sora-VariableFont_wght.ttf') format('truetype-variations');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Sora Static Fonts - Fallback for older browsers */
+@font-face {
+  font-family: 'Sora';
+  src: url('../../fonts/Sora/static/Sora-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora';
+  src: url('../../fonts/Sora/static/Sora-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora';
+  src: url('../../fonts/Sora/static/Sora-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora';
+  src: url('../../fonts/Sora/static/Sora-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora';
+  src: url('../../fonts/Sora/static/Sora-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora';
+  src: url('../../fonts/Sora/static/Sora-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora';
+  src: url('../../fonts/Sora/static/Sora-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sora';
+  src: url('../../fonts/Sora/static/Sora-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tailwind v4 Theme Configuration */
+@theme {
+  /* Primary font family - Local Sora Variable with static fallbacks */
+  --font-sora:
+    'Sora Variable', 'Sora', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* Alias the default sans font to Sora */
+  --font-sans:
+    'Sora Variable', 'Sora', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* Display font (for headings) - also using Sora but can be customized separately */
+  --font-display:
+    'Sora Variable', 'Sora', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* Alternative mono font if needed */
+  --font-mono: ui-monospace, 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+}
+
+/* Legacy CSS custom property for backward compatibility */
 :root {
- --ds-sans-font: 'Sora Variable', sans-serif;
+  --ds-sans-font: var(--font-sora);
 }

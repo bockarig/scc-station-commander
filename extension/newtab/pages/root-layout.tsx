@@ -1,11 +1,17 @@
-import React from 'react'
+import { AppHeader } from '@/extension/newtab/components/app-header.tsx'
 import { Outlet } from 'react-router'
 
-// TODO: Add application shell
-export const RootLayout = () => {
-  return (
-    <div>
-      <Outlet />
-    </div>
-  )
-}
+import { ThemeProvider } from '@/components/theme-provider'
+
+export const RootLayout = () => (
+  <>
+    <ThemeProvider defaultTheme="system">
+      <div className="border-b border-gray-200 dark:border-gray-800">
+        <AppHeader />
+      </div>
+      <div className="p-4 sm:p-6 lg:p-8">
+        <Outlet />
+      </div>
+    </ThemeProvider>
+  </>
+)

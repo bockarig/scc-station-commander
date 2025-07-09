@@ -2,7 +2,7 @@
   "name": "station-commander",
   "description": "A better station command (SCC)",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.4.0",
   "type": "module",
   "scripts": {
     "dev": "wxt",
@@ -20,7 +20,6 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@fontsource-variable/sora": "^5.2.6",
     "@remixicon/react": "^4.6.0",
     "clsx": "^2.1.1",
     "ms": "^2.1.3",
@@ -32,6 +31,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@heroicons/react": "^2.2.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.2",
     "@radix-ui/colors": "^3.0.0",
     "@storybook/addon-themes": "^9.0.16",

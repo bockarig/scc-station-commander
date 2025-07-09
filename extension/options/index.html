@@ -6,7 +6,7 @@
   data-scaling="100%"
   data-gray-color="slate"
   data-accent-color="cyan"
-  data-has-background="true"
+  data-has-background="false"
   data-panel-background="solid"
   class="creightit"
 >
@@ -18,16 +18,21 @@
       html,
       body {
         font-size: 16px !important;
-        font-family: var(--font-sans), sans-serif !important;
       }
     </style>
-    <title>SCC Commander</title>
+    <title>SCC Commander | Settings</title>
+    <!-- Customize the manifest options -->
+    <meta name="manifest.open_in_tab" content="true" />
+    <!--    <meta name="manifest.chrome_style" content="false" />-->
+    <!--    <meta name="manifest.browser_style" content="false" />-->
+
     <!-- Set include/exclude if the page should be removed from some builds -->
     <!--    <meta name="manifest.include" content="['chrome', ...]" />-->
     <!--    <meta name="manifest.exclude" content="['chrome', ...]" />-->
   </head>
-  <body class="min-h-full antialiased">
-    <div id="root" class="min-h-full"></div>
+  <body>
+    <!-- ... -->
+    <div id="root"></div>
     <script src="./main.tsx" type="module"></script>
   </body>
 </html>
