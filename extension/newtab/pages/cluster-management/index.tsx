@@ -1,11 +1,8 @@
 import React from 'react'
-import { useMatches } from 'react-router'
 
 import { ViewRouteMatch } from '@/components/view-route-match.tsx'
 
-export const Home = () => {
-  const config = useAppConfig()
-  const matches = useMatches()
+export const ClusterManagement = () => {
   return (
     <div className="px-6 py-24 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
@@ -18,7 +15,7 @@ export const Home = () => {
         </p>
       </div>
       <div className="mt-16">
-        <ViewRouteMatch title="useMatches" className="mx-auto max-w-xl" />
+        <ViewRouteMatch path="/cluster-management" className="mx-auto max-w-xl" />
       </div>
     </div>
   )
