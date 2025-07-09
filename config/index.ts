@@ -5,13 +5,3 @@ export const EXTENSION_CONFIG = {
   // default_locale: "en",
   // defaultTheme: "system",
 }
-
-export const DEFAULT_USER_CONFIG = {
-  alias: 'bockarig',
-  homeFacility: 'DGT8',
-  role: 'Process Assistant',
-  firstName: 'George',
-  lastName: 'Bockari',
-  shiftHours: '12:20AM-12:50PM',
-  shiftDays: ['Thursday', 'Friday', 'Saturday'],
-}
