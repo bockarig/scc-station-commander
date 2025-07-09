@@ -6,9 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 export const RootLayout = () => (
   <>
     <ThemeProvider defaultTheme="system">
-      <div className="border-b border-gray-200 dark:border-gray-800">
-        <AppHeader />
-      </div>
+      <AppHeader />
       <div className="p-4 sm:p-6 lg:p-8">
         <Outlet />
       </div>
