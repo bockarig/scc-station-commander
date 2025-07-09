@@ -6,12 +6,8 @@ export const EXTENSION_CONFIG = {
   // defaultTheme: "system",
 }
 
-export const DEFAULT_USER_CONFIG = {
-  alias: "bockarig",
-  homeFacility: "DGT8",
-  role: "Process Assistant",
-  firstName: "George",
-  lastName: "Bockari",
-  shiftHours: "12:20AM-12:50PM",
-  shiftDays: ["Thursday", "Friday", "Saturday"],
+export enum AMZL_ROLES {
+  "PROCESS_ASSISTANT" = "Process Assistant",
+  "AREA_MANAGER" = "Area Manager",
+  "AMBASSADOR" = "Ambassador",
 }
