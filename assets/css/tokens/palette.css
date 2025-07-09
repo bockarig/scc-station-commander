@@ -1,0 +1,14 @@
+/* Base colors*/
+@import '@radix-ui/colors/black-alpha.css';
+@import '@radix-ui/colors/white-alpha.css';
+
+/* Theme */
+@import '../colors/slate.css';
+@import '../colors/cyan.css';
+
+/* Support colors */
+@import '../colors/green.css';
+@import '../colors/red.css';
+@import '../colors/tomato.css';
+@import '../colors/amber.css';
+@import '../colors/orange.css';
