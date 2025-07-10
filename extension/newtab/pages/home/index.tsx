@@ -578,7 +578,7 @@ export const Dashboard = () => {
                           return (
                             <div
                               key={lane.id}
-                              className={`group relative cursor-pointer rounded-sm border-2 p-3 text-center transition-all hover:shadow-md ${
+                              className={`group relative cursor-pointer rounded-sm border-2 p-3 text-center hover:shadow-md ${
                                 isHighlighted
                                   ? `${getHighlightedColor(lane.status)} z-10`
                                   : isDeemphasized
@@ -623,7 +623,7 @@ export const Dashboard = () => {
                               )}
 
                               {/* Progressive Disclosure - Show on Hover */}
-                              <div className="bg-opacity-75 absolute inset-0 flex flex-col items-center justify-center rounded-sm bg-black p-2 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
+                              <div className="bg-opacity-75 absolute inset-0 flex flex-col items-center justify-center rounded-sm bg-black p-2 text-xs text-white opacity-0 group-hover:opacity-100">
                                 <div className="font-medium">
                                   {lane.volume}/{lane.capacity} packages
                                 </div>
@@ -640,7 +640,7 @@ export const Dashboard = () => {
                               {/* Capacity Bar */}
                               <div className="bg-gray-3 mt-2 h-1.5 w-full rounded-sm">
                                 <div
-                                  className={`h-1.5 rounded-sm transition-all ${
+                                  className={`h-1.5 rounded-sm ${
                                     isHighlighted
                                       ? lane.status === 'high'
                                         ? 'bg-gray-800'
@@ -768,7 +768,7 @@ export const Dashboard = () => {
           </div>
 
           {/* Unified Associates List */}
-          <Card className="rounded-sm">
+          <Card className="border-transparent bg-transparent">
             <CardHeader>
               <CardTitle>All Associates</CardTitle>
             </CardHeader>
@@ -778,12 +778,12 @@ export const Dashboard = () => {
                 {currentData.stowers.map((stower) => (
                   <div
                     key={stower.id}
-                    className={`cursor-pointer rounded-sm border p-4 transition-all hover:shadow-md ${
+                    className={`border-brd-line cursor-pointer rounded-sm border p-4 hover:shadow-md ${
                       swapMode && selectedForSwap.includes(stower.id)
-                        ? 'border-gray-600 bg-gray-100'
+                        ? 'border-gray-600 bg-pink-500'
                         : stower.status === 'below'
-                          ? 'border-brd-ring bg-gray-100/50 hover:border-gray-500'
-                          : 'hover:border-brd-line border-gray-200'
+                          ? 'border-brd-ring bg-gray-gray-3 hover:border-gray-7'
+                          : 'hover:border-brd-control border-brd-line'
                     }`}
                     onClick={() => {
                       if (swapMode) {
@@ -841,7 +841,7 @@ export const Dashboard = () => {
                 {currentData.buffers.map((buffer) => (
                   <div
                     key={buffer.id}
-                    className={`cursor-pointer rounded-sm border p-4 transition-all hover:shadow-md ${
+                    className={`cursor-pointer rounded-sm border p-4 hover:shadow-md ${
                       buffer.performance === 'attention'
                         ? 'border-brd-ring bg-gray-100/50 hover:border-gray-500'
                         : buffer.performance === 'excellent'
