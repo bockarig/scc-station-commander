@@ -1,3 +1,4 @@
+import { TrendUpIcon } from '@phosphor-icons/react'
 import { TrendingUp } from 'lucide-react'
 
 import { Card } from '@/components/ui/card'
@@ -19,22 +20,20 @@ export function StowRateCard({
     <Card className="rounded-sm p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className="mb-1 text-sm font-medium text-gray-600">
+          <h2 className="mb-1 text-sm font-medium">
             {isStationWide ? 'Station Avg Stow Rate' : 'Avg Stow Rate'}
-          </p>
+          </h2>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-gray-900">{Math.round(currentRate)}</span>
-            <span className="rounded-sm bg-gray-200 px-2 py-1 text-sm font-medium text-gray-900">
-              +3.7%
-            </span>
+            <span className="text-3xl font-bold">{Math.round(currentRate)}</span>
+            <span className="bg-gray-7 rounded px-2 py-1 text-sm font-medium">+3.7%</span>
           </div>
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="text-cnt-secondary mt-1 text-xs">
             Target: {targetRate} packages/hour
             {isStationWide && totalStowers && ` • ${totalStowers} stowers`}
           </p>
         </div>
-        <div className="rounded-sm bg-gray-100 p-2">
-          <TrendingUp className="h-8 w-8 text-gray-700" />
+        <div className="rounded-sm p-2">
+          <TrendUpIcon weight="duotone" className="h-8 w-8" />
         </div>
       </div>
 

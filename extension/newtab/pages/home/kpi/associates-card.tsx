@@ -1,3 +1,4 @@
+import { UsersThreeIcon } from '@phosphor-icons/react'
 import { Users } from 'lucide-react'
 
 import { Card } from '@/components/ui/card'
@@ -21,49 +22,47 @@ export function AssociatesCard({
     <Card className="rounded-sm p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className="mb-1 text-sm font-medium text-gray-600">
+          <h2 className="mb-1 text-sm font-medium">
             {isStationWide ? 'Total Associates' : 'Associates'}
-          </p>
+          </h2>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-gray-900">{totalCount}</span>
-            <span className="rounded-sm bg-gray-200 px-2 py-1 text-sm font-medium text-gray-900">
-              On Prem{' '}
-            </span>
+            <span className="text-3xl font-bold">{totalCount}</span>
+            <span className="bg-gray-7 rounded px-2 py-1 text-sm font-medium">On Prem </span>
           </div>
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="text-cnt-secondary mt-1 text-xs">
             {stowersCount} stowers, {buffersCount} buffers
             {isStationWide && clusterCount && ` • ${clusterCount} clusters`}
           </p>
         </div>
-        <div className="rounded-sm bg-gray-100 p-2">
-          <Users className="h-8 w-8 text-gray-700" />
+        <div className="rounded-sm">
+          <UsersThreeIcon weight="duotone" className="h-8 w-8" />
         </div>
       </div>
 
       {/* Stacked Bar Chart */}
       <div className="space-y-2">
         <div className="flex items-center gap-2 text-xs">
-          <div className="h-2 w-2 rounded-sm bg-gray-700"></div>
-          <span className="text-gray-600">Stowers</span>
-          <div className="ml-4 h-2 w-2 rounded-sm bg-gray-400"></div>
-          <span className="text-gray-600">Buffers</span>
+          <div className="bg-gray-9 h-2 w-2 rounded-sm"></div>
+          <span className="text-cnt-secondary">Stowers</span>
+          <div className="bg-gray-5 ml-4 h-2 w-2 rounded-sm"></div>
+          <span className="text-cnt-secondary">Buffers</span>
         </div>
         <div className="flex h-8 overflow-hidden rounded-sm bg-gray-100">
           <div
-            className="h-full bg-gray-700"
+            className="bg-gray-9 h-full"
             style={{
               width: `${(stowersCount / totalCount) * 100}%`,
             }}
           />
           <div
-            className="h-full bg-gray-400"
+            className="bg-gray-5 h-full"
             style={{
               width: `${(buffersCount / totalCount) * 100}%`,
             }}
           />
         </div>
       </div>
-      <div className="mt-2 flex justify-between text-xs text-gray-400">
+      <div className="text-cnt-tertiary mt-2 flex justify-between text-xs">
         <span>{stowersCount} Stowers</span>
         <span>{buffersCount} Buffers</span>
       </div>

@@ -1,3 +1,4 @@
+import { PackageIcon } from '@phosphor-icons/react'
 import { Package } from 'lucide-react'
 
 import { Card } from '@/components/ui/card'
@@ -13,11 +14,11 @@ export function VolumeCard({ current, capacity, trend, isStationWide = false }: 
   const getTrendData = () => {
     switch (trend) {
       case 'up':
-        return { percentage: '+12.5%', color: 'text-gray-900 bg-gray-200' }
+        return { percentage: '+12.5%', color: 'text-cnt-primary bg-gray-7' }
       case 'down':
-        return { percentage: '-2.8%', color: 'text-gray-700 bg-gray-300' }
+        return { percentage: '-2.8%', color: 'text-cnt-secondary bg-gray-5' }
       default:
-        return { percentage: '+1.2%', color: 'text-gray-600 bg-gray-100' }
+        return { percentage: '+1.2%', color: 'text-cnt-tertiary bg-gray-3' }
     }
   }
 
@@ -27,22 +28,22 @@ export function VolumeCard({ current, capacity, trend, isStationWide = false }: 
     <Card className="rounded-sm p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <p className="mb-1 text-sm font-medium text-gray-600">
+          <h2 className="mb-1 text-sm font-medium">
             {isStationWide ? 'Station Volume' : 'Volume'}
-          </p>
+          </h2>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold text-gray-900">{current.toLocaleString()}</span>
+            <span className="text-3xl font-bold">{current.toLocaleString()}</span>
             <span className={`rounded-sm px-2 py-1 text-sm font-medium ${trendData.color}`}>
               {trendData.percentage}
             </span>
           </div>
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="text-cnt-secondary mt-1 text-xs">
             of {capacity.toLocaleString()} total capacity
             {isStationWide && ' across all clusters'}
           </p>
         </div>
-        <div className="rounded-sm bg-gray-100 p-2">
-          <Package className="h-8 w-8 text-gray-700" />
+        <div className="rounded-sm p-2">
+          <PackageIcon weight="duotone" className="h-8 w-8" />
         </div>
       </div>
 
@@ -56,14 +57,14 @@ export function VolumeCard({ current, capacity, trend, isStationWide = false }: 
           return (
             <div key={i} className="flex flex-1 flex-col items-center">
               <div
-                className={`w-full rounded-t-sm ${isCurrentHour ? 'bg-gray-800' : 'bg-gray-400'} transition-all`}
+                className={`w-full rounded-t-sm ${isCurrentHour ? 'bg-gray-800' : 'bg-pink-500'} transition-all`}
                 style={{ height: `${height}%` }}
               />
             </div>
           )
         })}
       </div>
-      <div className="mt-2 flex justify-between text-xs text-gray-400">
+      <div className="text-cnt-tertiary mt-2 flex justify-between text-xs">
         <span>12 hrs ago</span>
         <span>Now</span>
       </div>
