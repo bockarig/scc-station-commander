@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import { createHashRouter, RouterProvider } from 'react-router'
 
-import { Home } from './pages/home'
+import { Dashboard } from './pages/home'
 import { RootLayout } from './pages/root-layout'
 
 import '@/assets/tailwind.css'
@@ -21,7 +21,7 @@ const router = createHashRouter([
     children: [
       {
         index: true,
-        Component: Home,
+        Component: Dashboard,
       },
       {
         path: '/cluster-management',

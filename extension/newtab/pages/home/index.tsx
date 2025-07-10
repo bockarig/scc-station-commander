@@ -1,25 +1,1148 @@
-import React from 'react'
-import { useMatches } from 'react-router'
+import { useState } from 'react'
+import { Clock, MessageSquare, RefreshCw } from 'lucide-react'
 
-import { ViewRouteMatch } from '@/components/view-route-match.tsx'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Label } from '@/components/ui/label'
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Textarea } from '@/components/ui/textarea'
 
-export const Home = () => {
-  const config = useAppConfig()
-  const matches = useMatches()
+import { KpiMetricsSection } from './kpi/kpi-metrics-section'
+
+// Mock data structure
+const clusterData = {
+  AB: {
+    clusters: ['A', 'B'],
+    stowers: [
+      {
+        id: 'S001',
+        name: 'John Smith',
+        assignment: 'A1-A4',
+        currentRate: 85,
+        target: 90,
+        status: 'below',
+      },
+      {
+        id: 'S002',
+        name: 'Maria Garcia',
+        assignment: 'A5-A8',
+        currentRate: 95,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S003',
+        name: 'David Chen',
+        assignment: 'B1-B4',
+        currentRate: 88,
+        target: 90,
+        status: 'below',
+      },
+      {
+        id: 'S004',
+        name: 'Sarah Johnson',
+        assignment: 'B5-B8',
+        currentRate: 92,
+        target: 90,
+        status: 'above',
+      },
+    ],
+    buffers: [
+      {
+        id: 'B001',
+        name: 'Mike Wilson',
+        assignment: 'A1-A6',
+        performance: 'good',
+        notes: 'Consistent catch rate',
+      },
+      {
+        id: 'B002',
+        name: 'Lisa Brown',
+        assignment: 'A7-A13',
+        performance: 'attention',
+        notes: 'Missed 3 packages in last hour',
+      },
+      { id: 'B003', name: 'Tom Davis', assignment: 'B1-B6', performance: 'good', notes: '' },
+      {
+        id: 'B004',
+        name: 'Anna Lee',
+        assignment: 'B7-B13',
+        performance: 'excellent',
+        notes: 'Zero misses today',
+      },
+    ],
+    lanes: generateLaneData('A').concat(generateLaneData('B')),
+    volume: { current: 1250, capacity: 1500, trend: 'up' },
+  },
+  CD: {
+    clusters: ['C', 'D'],
+    stowers: [
+      {
+        id: 'S005',
+        name: 'Robert Kim',
+        assignment: 'C1-C4',
+        currentRate: 91,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S006',
+        name: 'Jennifer Wu',
+        assignment: 'C5-C8',
+        currentRate: 87,
+        target: 90,
+        status: 'below',
+      },
+      {
+        id: 'S007',
+        name: 'Carlos Rodriguez',
+        assignment: 'D1-D4',
+        currentRate: 93,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S008',
+        name: 'Emily Taylor',
+        assignment: 'D5-D8',
+        currentRate: 89,
+        target: 90,
+        status: 'below',
+      },
+    ],
+    buffers: [
+      { id: 'B005', name: 'Kevin Park', assignment: 'C1-C6', performance: 'good', notes: '' },
+      { id: 'B006', name: 'Rachel Green', assignment: 'C7-C13', performance: 'good', notes: '' },
+      {
+        id: 'B007',
+        name: 'James Miller',
+        assignment: 'D1-D6',
+        performance: 'attention',
+        notes: 'Slow on peak hours',
+      },
+      { id: 'B008', name: 'Sophie Anderson', assignment: 'D7-D13', performance: 'good', notes: '' },
+    ],
+    lanes: generateLaneData('C').concat(generateLaneData('D')),
+    volume: { current: 980, capacity: 1500, trend: 'stable' },
+  },
+  EG: {
+    clusters: ['E', 'G'],
+    stowers: [
+      {
+        id: 'S009',
+        name: 'Michael Torres',
+        assignment: 'E1-E4',
+        currentRate: 94,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S010',
+        name: 'Amanda Foster',
+        assignment: 'E5-E8',
+        currentRate: 86,
+        target: 90,
+        status: 'below',
+      },
+      {
+        id: 'S011',
+        name: 'Daniel Wright',
+        assignment: 'G1-G4',
+        currentRate: 91,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S012',
+        name: 'Jessica Martinez',
+        assignment: 'G5-G8',
+        currentRate: 88,
+        target: 90,
+        status: 'below',
+      },
+    ],
+    buffers: [
+      {
+        id: 'B009',
+        name: 'Ryan Cooper',
+        assignment: 'E1-E6',
+        performance: 'excellent',
+        notes: 'Top performer this week',
+      },
+      { id: 'B010', name: 'Nicole Hayes', assignment: 'E7-E13', performance: 'good', notes: '' },
+      { id: 'B011', name: 'Brandon Scott', assignment: 'G1-G6', performance: 'good', notes: '' },
+      {
+        id: 'B012',
+        name: 'Melissa Clark',
+        assignment: 'G7-G13',
+        performance: 'attention',
+        notes: 'Training needed on new process',
+      },
+    ],
+    lanes: generateLaneData('E').concat(generateLaneData('G')),
+    volume: { current: 1180, capacity: 1500, trend: 'up' },
+  },
+  HJ: {
+    clusters: ['H', 'J'],
+    stowers: [
+      {
+        id: 'S013',
+        name: 'Christopher Lee',
+        assignment: 'H1-H4',
+        currentRate: 89,
+        target: 90,
+        status: 'below',
+      },
+      {
+        id: 'S014',
+        name: 'Stephanie Adams',
+        assignment: 'H5-H8',
+        currentRate: 96,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S015',
+        name: 'Anthony Garcia',
+        assignment: 'J1-J4',
+        currentRate: 92,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S016',
+        name: 'Lauren Thompson',
+        assignment: 'J5-J8',
+        currentRate: 87,
+        target: 90,
+        status: 'below',
+      },
+    ],
+    buffers: [
+      { id: 'B013', name: 'Marcus Johnson', assignment: 'H1-H6', performance: 'good', notes: '' },
+      {
+        id: 'B014',
+        name: 'Samantha White',
+        assignment: 'H7-H13',
+        performance: 'excellent',
+        notes: 'Perfect attendance record',
+      },
+      { id: 'B015', name: 'Tyler Brown', assignment: 'J1-J6', performance: 'good', notes: '' },
+      { id: 'B016', name: 'Kimberly Davis', assignment: 'J7-J13', performance: 'good', notes: '' },
+    ],
+    lanes: generateLaneData('H').concat(generateLaneData('J')),
+    volume: { current: 1320, capacity: 1500, trend: 'stable' },
+  },
+  KL: {
+    clusters: ['K', 'L'],
+    stowers: [
+      {
+        id: 'S017',
+        name: 'Jonathan Miller',
+        assignment: 'K1-K4',
+        currentRate: 93,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S018',
+        name: 'Rebecca Wilson',
+        assignment: 'K5-K8',
+        currentRate: 84,
+        target: 90,
+        status: 'below',
+      },
+      {
+        id: 'S019',
+        name: 'Kevin Anderson',
+        assignment: 'L1-L4',
+        currentRate: 90,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S020',
+        name: 'Michelle Taylor',
+        assignment: 'L5-L8',
+        currentRate: 86,
+        target: 90,
+        status: 'below',
+      },
+    ],
+    buffers: [
+      {
+        id: 'B017',
+        name: 'Gregory Moore',
+        assignment: 'K1-K6',
+        performance: 'attention',
+        notes: 'Needs refresher training',
+      },
+      {
+        id: 'B018',
+        name: 'Christina Jackson',
+        assignment: 'K7-K13',
+        performance: 'good',
+        notes: '',
+      },
+      {
+        id: 'B019',
+        name: 'Patrick Martin',
+        assignment: 'L1-L6',
+        performance: 'excellent',
+        notes: 'Mentor for new hires',
+      },
+      { id: 'B020', name: 'Vanessa Lee', assignment: 'L7-L13', performance: 'good', notes: '' },
+    ],
+    lanes: generateLaneData('K').concat(generateLaneData('L')),
+    volume: { current: 890, capacity: 1500, trend: 'down' },
+  },
+  MP: {
+    clusters: ['M', 'P'],
+    stowers: [
+      {
+        id: 'S021',
+        name: 'Steven Rodriguez',
+        assignment: 'M1-M4',
+        currentRate: 97,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S022',
+        name: 'Diana Lopez',
+        assignment: 'M5-M8',
+        currentRate: 88,
+        target: 90,
+        status: 'below',
+      },
+      {
+        id: 'S023',
+        name: 'Matthew Gonzalez',
+        assignment: 'P1-P4',
+        currentRate: 91,
+        target: 90,
+        status: 'above',
+      },
+      {
+        id: 'S024',
+        name: 'Ashley Hernandez',
+        assignment: 'P5-P8',
+        currentRate: 85,
+        target: 90,
+        status: 'below',
+      },
+    ],
+    buffers: [
+      { id: 'B021', name: 'Joshua Young', assignment: 'M1-M6', performance: 'good', notes: '' },
+      { id: 'B022', name: 'Brittany King', assignment: 'M7-M13', performance: 'good', notes: '' },
+      {
+        id: 'B023',
+        name: 'Andrew Wright',
+        assignment: 'P1-P6',
+        performance: 'attention',
+        notes: 'Equipment issues reported',
+      },
+      {
+        id: 'B024',
+        name: 'Megan Hill',
+        assignment: 'P7-P13',
+        performance: 'excellent',
+        notes: 'Cross-trained on multiple areas',
+      },
+    ],
+    lanes: generateLaneData('M').concat(generateLaneData('P')),
+    volume: { current: 1420, capacity: 1500, trend: 'up' },
+  },
+}
+
+function generateLaneData(cluster: string) {
+  const lanes = []
+  for (let i = 1; i <= 13; i++) {
+    const aisle1 = i * 2 - 1
+    const aisle2 = i * 2
+    lanes.push({
+      id: `${cluster}${aisle1}-${cluster}${aisle2}`,
+      cluster,
+      volume: Math.floor(Math.random() * 50) + 20,
+      capacity: 80,
+      status: Math.random() > 0.8 ? 'high' : Math.random() > 0.6 ? 'medium' : 'normal',
+    })
+  }
+  return lanes
+}
+
+function isLaneInAssignment(laneId: string, assignment: string): boolean {
+  // Parse assignment like "A1-A4" or "A7-A13"
+  const assignmentMatch = assignment.match(/([A-Z])(\d+)-([A-Z])(\d+)/)
+  if (!assignmentMatch) return false
+
+  const [, startCluster, startNum, endCluster, endNum] = assignmentMatch
+  const startNumber = Number.parseInt(startNum)
+  const endNumber = Number.parseInt(endNum)
+
+  // Parse lane ID like "A1-A2" or "B5-B6"
+  const laneMatch = laneId.match(/([A-Z])(\d+)-([A-Z])(\d+)/)
+  if (!laneMatch) return false
+
+  const [, laneCluster, laneStart, , laneEnd] = laneMatch
+  const laneStartNum = Number.parseInt(laneStart)
+  const laneEndNum = Number.parseInt(laneEnd)
+
+  // Check if lane cluster matches and lane numbers fall within assignment range
+  return laneCluster === startCluster && laneStartNum >= startNumber && laneEndNum <= endNumber
+}
+
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'high':
+      return 'bg-gray-300 border-gray-500'
+    case 'medium':
+      return 'bg-gray-200 border-gray-400'
+    case 'attention':
+      return 'bg-gray-200 border-gray-400'
+    case 'excellent':
+      return 'bg-gray-100 border-gray-300'
+    default:
+      return 'bg-gray-50 border-gray-200'
+  }
+}
+
+const getPerformanceColor = (performance: string) => {
+  switch (performance) {
+    case 'excellent':
+      return 'bg-gray-800'
+    case 'good':
+      return 'bg-gray-600'
+    case 'attention':
+      return 'bg-gray-400'
+    default:
+      return 'bg-gray-300'
+  }
+}
+
+function calculateStationWideData(clusterData: any) {
+  const allStowers = Object.values(clusterData).flatMap((cluster: any) => cluster.stowers)
+  const allBuffers = Object.values(clusterData).flatMap((cluster: any) => cluster.buffers)
+
+  const totalVolume = Object.values(clusterData).reduce(
+    (acc: any, cluster: any) => ({
+      current: acc.current + cluster.volume.current,
+      capacity: acc.capacity + cluster.volume.capacity,
+    }),
+    { current: 0, capacity: 0 },
+  )
+
+  // Determine overall trend based on majority of clusters
+  const trends = Object.values(clusterData).map((cluster: any) => cluster.volume.trend)
+  const trendCounts = trends.reduce((acc: any, trend) => {
+    acc[trend] = (acc[trend] || 0) + 1
+    return acc
+  }, {})
+  const overallTrend = Object.keys(trendCounts).reduce((a, b) =>
+    trendCounts[a] > trendCounts[b] ? a : b,
+  )
+
+  return {
+    totalVolume: {
+      current: totalVolume.current,
+      capacity: totalVolume.capacity,
+      trend: overallTrend as 'up' | 'down' | 'stable',
+    },
+    allStowers,
+    allBuffers,
+    clusterCount: Object.keys(clusterData).length,
+  }
+}
+
+export const Dashboard = () => {
+  const [selectedCluster, setSelectedCluster] = useState('AB')
+  const [selectedAssociate, setSelectedAssociate] = useState<any>(null)
+  const [notes, setNotes] = useState('')
+  const [swapMode, setSwapMode] = useState(false)
+  const [selectedForSwap, setSelectedForSwap] = useState<string[]>([])
+  const [selectedStowerSheet, setSelectedStowerSheet] = useState<any>(null)
+  const [selectedBufferSheet, setSelectedBufferSheet] = useState<any>(null)
+
+  const currentData = clusterData[selectedCluster as keyof typeof clusterData]
+  const stationData = calculateStationWideData(clusterData)
+
+  const handleSwapAssignment = () => {
+    if (selectedForSwap.length === 2) {
+      // In a real app, this would update the backend
+      console.log(`Swapping assignments between ${selectedForSwap[0]} and ${selectedForSwap[1]}`)
+      setSwapMode(false)
+      setSelectedForSwap([])
+    }
+  }
+
   return (
-    <div className="px-6 py-24 sm:py-32 lg:px-8">
-      <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-5xl font-semibold tracking-tight sm:text-7xl">
-          Page Title <span className="text-cnt-tertiary text-lg">(path)</span>
-        </h2>
-        <p className="text-cnt-secondary mt-8 text-lg font-medium text-pretty sm:text-xl/8">
-          Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
-          Elit sunt amet fugiat veniam occaecat fugiat.
-        </p>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Station Dashboard</h1>
+          <p className="text-gray-600">Process Assistant Overview</p>
+        </div>
+        <div className="flex items-center gap-4">
+          <Button className="bg-transparent leading-6" variant="outline" size="sm">
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Refresh Data
+          </Button>
+          <Badge variant="outline" className="rounded-none text-sm">
+            <Clock className="mr-1 h-3 w-3" />
+            Last updated: 2 min ago
+          </Badge>
+        </div>
       </div>
-      <div className="mt-16">
-        <ViewRouteMatch title="useMatches" className="mx-auto max-w-xl" />
-      </div>
+
+      {/* Station-wide KPI Metrics Section */}
+      <KpiMetricsSection stationData={stationData} />
+
+      {/* Cluster-specific content with tabs */}
+      <Tabs value={selectedCluster} onValueChange={setSelectedCluster} className="w-full">
+        {/* Lane Layout Section Header with Tabs */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-900">Cluster Details</h2>
+            <p className="mt-1 text-gray-600">
+              Select a cluster to view detailed lane status and associate management
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <TabsList className="grid grid-cols-6">
+              <TabsTrigger value="AB">AB</TabsTrigger>
+              <TabsTrigger value="CD">CD</TabsTrigger>
+              <TabsTrigger value="EG">EG</TabsTrigger>
+              <TabsTrigger value="HJ">HJ</TabsTrigger>
+              <TabsTrigger value="KL">KL</TabsTrigger>
+              <TabsTrigger value="MP">MP</TabsTrigger>
+            </TabsList>
+          </div>
+        </div>
+
+        <TabsContent value={selectedCluster} className="mt-6 space-y-6">
+          {/* KPI Metrics Section */}
+
+          {/* Lane Layout Section Header */}
+          {/* Lane Views */}
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            {currentData.clusters.map((cluster) => (
+              <Card key={cluster} className="rounded-sm border-gray-200 bg-gray-200">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-xl">Cluster {cluster}</CardTitle>
+                    <Badge variant="secondary" className="bg-white text-sm">
+                      {currentData.lanes
+                        .filter((lane) => lane.cluster === cluster)
+                        .reduce((acc, lane) => acc + lane.volume, 0)}{' '}
+                      at station
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <div className="rounded-sm border border-none border-gray-200 p-6">
+                    <div className="grid grid-cols-4 gap-3">
+                      {currentData.lanes
+                        .filter((lane) => lane.cluster === cluster)
+                        .map((lane) => {
+                          const isHighlighted =
+                            (selectedStowerSheet &&
+                              isLaneInAssignment(lane.id, selectedStowerSheet.assignment)) ||
+                            (selectedBufferSheet &&
+                              isLaneInAssignment(lane.id, selectedBufferSheet.assignment))
+
+                          const hasSelectedAssociate = selectedStowerSheet || selectedBufferSheet
+                          const isDeemphasized = hasSelectedAssociate && !isHighlighted
+
+                          // Get base status color
+                          const baseStatusColor = getStatusColor(lane.status)
+
+                          // Create highlighted version that preserves status color
+                          const getHighlightedColor = (status: string) => {
+                            switch (status) {
+                              case 'high':
+                                return 'bg-gray-400 border-gray-700 shadow-lg ring-2 ring-gray-500'
+                              case 'medium':
+                                return 'bg-gray-300 border-gray-600 shadow-lg ring-2 ring-gray-400'
+                              case 'attention':
+                                return 'bg-gray-300 border-gray-600 shadow-lg ring-2 ring-gray-400'
+                              case 'excellent':
+                                return 'bg-gray-200 border-gray-500 shadow-lg ring-2 ring-gray-300'
+                              default:
+                                return 'bg-gray-200 border-gray-600 shadow-lg ring-2 ring-gray-400'
+                            }
+                          }
+
+                          return (
+                            <div
+                              key={lane.id}
+                              className={`group relative cursor-pointer rounded-sm border-2 p-3 text-center transition-all hover:shadow-md ${
+                                isHighlighted
+                                  ? `${getHighlightedColor(lane.status)} z-10`
+                                  : isDeemphasized
+                                    ? `${baseStatusColor} opacity-30 grayscale`
+                                    : baseStatusColor
+                              }`}
+                              onClick={() => {
+                                // Toggle lane details on click
+                                console.log(`Lane ${lane.id} clicked - show detailed view`)
+                              }}
+                            >
+                              {/* Add assignment indicator for highlighted lanes */}
+                              {isHighlighted && (
+                                <div className="absolute -top-1 -right-1 h-3 w-3 rounded-sm border-2 border-white bg-blue-600"></div>
+                              )}
+
+                              {/* Primary Info - Always Visible */}
+                              <div
+                                className={`text-sm font-medium ${isDeemphasized ? 'text-gray-400' : ''}`}
+                              >
+                                {lane.id}
+                              </div>
+
+                              {/* Capacity Status */}
+                              <div
+                                className={`mt-1 text-xs font-medium ${isDeemphasized ? 'text-gray-400' : lane.volume > lane.capacity * 0.8 ? 'text-red-700' : 'text-gray-600'}`}
+                              >
+                                {Math.round((lane.volume / lane.capacity) * 100)}%
+                              </div>
+
+                              {/* Status Indicator */}
+                              {lane.status !== 'normal' && (
+                                <div
+                                  className={`absolute top-1 left-1 h-2 w-2 rounded-full ${
+                                    lane.status === 'high'
+                                      ? 'bg-red-500'
+                                      : lane.status === 'medium'
+                                        ? 'bg-yellow-500'
+                                        : 'bg-gray-400'
+                                  }`}
+                                ></div>
+                              )}
+
+                              {/* Progressive Disclosure - Show on Hover */}
+                              <div className="bg-opacity-75 absolute inset-0 flex flex-col items-center justify-center rounded-sm bg-black p-2 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
+                                <div className="font-medium">
+                                  {lane.volume}/{lane.capacity} packages
+                                </div>
+                                <div className="mt-1">
+                                  {lane.status === 'high' && '⚠️ High Volume'}
+                                  {lane.status === 'medium' && '⚡ Moderate Load'}
+                                  {lane.status === 'normal' && '✅ Normal Flow'}
+                                </div>
+                                <div className="mt-1 text-center">
+                                  Est. clear: {Math.round(lane.volume / 15)}min
+                                </div>
+                              </div>
+
+                              {/* Capacity Bar */}
+                              <div className="mt-2 h-1.5 w-full rounded-sm bg-gray-200">
+                                <div
+                                  className={`h-1.5 rounded-sm transition-all ${
+                                    isHighlighted
+                                      ? lane.status === 'high'
+                                        ? 'bg-gray-800'
+                                        : lane.status === 'medium'
+                                          ? 'bg-gray-700'
+                                          : lane.status === 'attention'
+                                            ? 'bg-gray-700'
+                                            : 'bg-gray-600'
+                                      : isDeemphasized
+                                        ? 'bg-gray-400'
+                                        : lane.volume > lane.capacity * 0.8
+                                          ? 'bg-red-500'
+                                          : lane.volume > lane.capacity * 0.6
+                                            ? 'bg-yellow-500'
+                                            : 'bg-gray-600'
+                                  }`}
+                                  style={{
+                                    width: `${Math.min((lane.volume / lane.capacity) * 100, 100)}%`,
+                                  }}
+                                ></div>
+                              </div>
+                            </div>
+                          )
+                        })}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Associates Management Section Header */}
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-semibold text-gray-900">Associates Management</h2>
+              <p className="mt-1 text-gray-600">
+                Monitor performance and manage assignments across all roles
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="h-3 w-3 rounded-sm bg-gray-700"></div>
+                  <span>Stowers ({currentData.stowers.length})</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-3 w-3 rounded-sm bg-gray-600"></div>
+                  <span>Buffers ({currentData.buffers.length})</span>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  variant={swapMode ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setSwapMode(!swapMode)}
+                >
+                  {swapMode ? 'Cancel Swap' : 'Swap Assignments'}
+                </Button>
+                {swapMode && selectedForSwap.length === 2 && (
+                  <Button size="sm" onClick={handleSwapAssignment}>
+                    Confirm Swap
+                  </Button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Performance Summary Cards */}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <Card className="border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
+              <CardContent className="rounded-sm p-4 px-2 py-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-700">Performing Well</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {currentData.stowers.filter((s) => s.status === 'above').length +
+                        currentData.buffers.filter(
+                          (b) => b.performance === 'excellent' || b.performance === 'good',
+                        ).length}
+                    </p>
+                  </div>
+                  <div className="rounded-lg bg-gray-200 p-2">
+                    <div className="h-6 w-6 rounded-sm bg-gray-700"></div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-gray-300 bg-gradient-to-r from-gray-100 to-gray-200">
+              <CardContent className="rounded-sm p-4 px-3 py-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-800">Need Attention</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {currentData.stowers.filter((s) => s.status === 'below').length +
+                        currentData.buffers.filter((b) => b.performance === 'attention').length}
+                    </p>
+                  </div>
+                  <div className="rounded-lg bg-gray-300 p-2">
+                    <div className="h-6 w-6 rounded-sm bg-gray-800"></div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
+              <CardContent className="rounded-sm p-4 px-3 py-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-700">Avg Stow Rate</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                      {Math.round(
+                        currentData.stowers.reduce((acc, s) => acc + s.currentRate, 0) /
+                          currentData.stowers.length,
+                      )}
+                      /hr
+                    </p>
+                  </div>
+                  <div className="rounded-lg bg-gray-200 p-2">
+                    <div className="h-6 w-6 rounded-sm bg-gray-700"></div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Unified Associates List */}
+          <Card className="rounded-sm">
+            <CardHeader>
+              <CardTitle>All Associates</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {/* Stowers */}
+                {currentData.stowers.map((stower) => (
+                  <div
+                    key={stower.id}
+                    className={`cursor-pointer rounded-sm border p-4 transition-all hover:shadow-md ${
+                      swapMode && selectedForSwap.includes(stower.id)
+                        ? 'border-gray-600 bg-gray-100'
+                        : stower.status === 'below'
+                          ? 'border-gray-400 bg-gray-100/50 hover:border-gray-500'
+                          : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                    onClick={() => {
+                      if (swapMode) {
+                        if (selectedForSwap.includes(stower.id)) {
+                          setSelectedForSwap(selectedForSwap.filter((id) => id !== stower.id))
+                        } else if (selectedForSwap.length < 2) {
+                          setSelectedForSwap([...selectedForSwap, stower.id])
+                        }
+                      } else {
+                        setSelectedStowerSheet(stower)
+                      }
+                    }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
+                          <div className="h-3 w-3 rounded-sm bg-gray-700"></div>
+                          <Badge
+                            variant="outline"
+                            className="border-gray-300 bg-gray-50 text-xs text-gray-700"
+                          >
+                            Stower
+                          </Badge>
+                        </div>
+                        <div>
+                          <div className="font-medium text-gray-900">{stower.name}</div>
+                          <div className="text-sm text-gray-600">{stower.assignment}</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          <div
+                            className={`font-bold ${stower.status === 'above' ? 'text-gray-900' : 'text-gray-700'}`}
+                          >
+                            {stower.currentRate}/hr
+                          </div>
+                          <div className="text-xs text-gray-500">Target: {stower.target}</div>
+                        </div>
+                        <Badge
+                          variant={stower.status === 'above' ? 'default' : 'secondary'}
+                          className={
+                            stower.status === 'above'
+                              ? 'border-gray-300 bg-gray-200 text-gray-900'
+                              : 'border-gray-400 bg-gray-300 text-gray-800'
+                          }
+                        >
+                          {stower.status === 'above' ? 'Above Target' : 'Below Target'}
+                        </Badge>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Buffers */}
+                {currentData.buffers.map((buffer) => (
+                  <div
+                    key={buffer.id}
+                    className={`cursor-pointer rounded-sm border p-4 transition-all hover:shadow-md ${
+                      buffer.performance === 'attention'
+                        ? 'border-gray-400 bg-gray-100/50 hover:border-gray-500'
+                        : buffer.performance === 'excellent'
+                          ? 'border-gray-300 bg-gray-50/50 hover:border-gray-400'
+                          : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                    onClick={() => setSelectedBufferSheet(buffer)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2">
+                          <div className="h-3 w-3 rounded-sm bg-gray-600"></div>
+                          <Badge
+                            variant="outline"
+                            className="border-gray-300 bg-gray-50 text-xs text-gray-700"
+                          >
+                            Buffer
+                          </Badge>
+                        </div>
+                        <div>
+                          <div className="font-medium text-gray-900">{buffer.name}</div>
+                          <div className="text-sm text-gray-600">{buffer.assignment}</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        {buffer.notes && (
+                          <div className="max-w-xs truncate rounded-sm bg-gray-100 px-2 py-1 text-xs text-gray-500">
+                            {buffer.notes}
+                          </div>
+                        )}
+                        <Badge
+                          variant="outline"
+                          className={
+                            buffer.performance === 'excellent'
+                              ? 'border-gray-300 bg-gray-200 text-gray-900'
+                              : buffer.performance === 'attention'
+                                ? 'border-gray-400 bg-gray-300 text-gray-800'
+                                : 'border-gray-200 bg-gray-100 text-gray-800'
+                          }
+                        >
+                          {buffer.performance === 'excellent'
+                            ? 'Excellent'
+                            : buffer.performance === 'attention'
+                              ? 'Needs Attention'
+                              : 'Good'}
+                        </Badge>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Stower Details Sheet */}
+          <Sheet
+            open={!!selectedStowerSheet}
+            onOpenChange={(open) => !open && setSelectedStowerSheet(null)}
+            modal={false}
+          >
+            <SheetContent className="w-[400px] sm:w-[540px]">
+              <SheetHeader>
+                <SheetTitle>Associate Details</SheetTitle>
+              </SheetHeader>
+              {selectedStowerSheet && (
+                <div className="mt-6 space-y-6">
+                  {/* Basic Info */}
+                  <div className="space-y-3">
+                    <div>
+                      <Label className="text-sm font-medium text-gray-500">Name</Label>
+                      <p className="text-lg font-semibold">{selectedStowerSheet.name}</p>
+                    </div>
+                    <div>
+                      <Label className="text-sm font-medium text-gray-500">Badge ID</Label>
+                      <p className="font-mono text-lg">{selectedStowerSheet.id}</p>
+                    </div>
+                    <div>
+                      <Label className="text-sm font-medium text-gray-500">Assignment</Label>
+                      <p className="text-lg">{selectedStowerSheet.assignment}</p>
+                    </div>
+                  </div>
+
+                  {/* QR Code */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium text-gray-500">Badge QR Code</Label>
+                    <div className="flex justify-center rounded-sm border-2 border-gray-200 bg-white p-4">
+                      <img
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${selectedStowerSheet.id}`}
+                        alt={`QR Code for ${selectedStowerSheet.id}`}
+                        className="h-32 w-32"
+                      />
+                    </div>
+                    <p className="text-center text-xs text-gray-500">
+                      Scan to access badge ID: {selectedStowerSheet.id}
+                    </p>
+                  </div>
+
+                  {/* Performance Metrics */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium text-gray-500">Performance</Label>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="rounded-sm bg-gray-50 p-3">
+                        <div className="text-sm text-gray-600">Current Rate</div>
+                        <div
+                          className={`text-xl font-bold ${selectedStowerSheet.status === 'above' ? 'text-gray-900' : 'text-gray-700'}`}
+                        >
+                          {selectedStowerSheet.currentRate}/hr
+                        </div>
+                      </div>
+                      <div className="rounded-sm bg-gray-50 p-3">
+                        <div className="text-sm text-gray-600">Target Rate</div>
+                        <div className="text-xl font-bold text-gray-900">
+                          {selectedStowerSheet.target}/hr
+                        </div>
+                      </div>
+                    </div>
+                    <div className="rounded-sm bg-gray-50 p-3">
+                      <div className="text-sm text-gray-600">Status</div>
+                      <Badge
+                        variant={selectedStowerSheet.status === 'above' ? 'default' : 'secondary'}
+                        className={
+                          selectedStowerSheet.status === 'above'
+                            ? 'border-gray-300 bg-gray-200 text-gray-900'
+                            : 'border-gray-400 bg-gray-300 text-gray-800'
+                        }
+                      >
+                        {selectedStowerSheet.status === 'above' ? 'Above Target' : 'Below Target'}
+                      </Badge>
+                    </div>
+                  </div>
+
+                  {/* Recent Activity */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium text-gray-500">Recent Activity</Label>
+                    <div className="space-y-2">
+                      <div className="rounded-sm bg-gray-50 p-2 text-sm">
+                        <div className="font-medium">
+                          Last Hour: {selectedStowerSheet.currentRate} packages
+                        </div>
+                        <div className="text-gray-600">Started shift at 6:00 AM</div>
+                      </div>
+                      <div className="rounded-sm bg-gray-50 p-2 text-sm">
+                        <div className="font-medium">Break taken: 10:15 AM - 10:30 AM</div>
+                        <div className="text-gray-600">15 minute break</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-2 pt-4">
+                    <Button variant="outline" className="flex-1 bg-transparent">
+                      <MessageSquare className="mr-2 h-4 w-4" />
+                      Add Note
+                    </Button>
+                    <Button variant="outline" className="flex-1 bg-transparent">
+                      <RefreshCw className="mr-2 h-4 w-4" />
+                      Refresh Data
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </SheetContent>
+          </Sheet>
+          {/* Buffer Details Sheet */}
+          <Sheet
+            open={!!selectedBufferSheet}
+            onOpenChange={(open) => !open && setSelectedBufferSheet(null)}
+            modal={false}
+          >
+            <SheetContent className="w-[400px] sm:w-[540px]">
+              <SheetHeader>
+                <SheetTitle>Buffer Associate Details</SheetTitle>
+              </SheetHeader>
+              {selectedBufferSheet && (
+                <div className="mt-6 space-y-6">
+                  {/* Basic Info */}
+                  <div className="space-y-3">
+                    <div>
+                      <Label className="text-sm font-medium text-gray-500">Name</Label>
+                      <p className="text-lg font-semibold">{selectedBufferSheet.name}</p>
+                    </div>
+                    <div>
+                      <Label className="text-sm font-medium text-gray-500">Badge ID</Label>
+                      <p className="font-mono text-lg">{selectedBufferSheet.id}</p>
+                    </div>
+                    <div>
+                      <Label className="text-sm font-medium text-gray-500">Assignment</Label>
+                      <p className="text-lg">{selectedBufferSheet.assignment}</p>
+                    </div>
+                  </div>
+
+                  {/* QR Code */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium text-gray-500">Badge QR Code</Label>
+                    <div className="flex justify-center rounded-sm border-2 border-gray-200 bg-white p-4">
+                      <img
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${selectedBufferSheet.id}`}
+                        alt={`QR Code for ${selectedBufferSheet.id}`}
+                        className="h-32 w-32"
+                      />
+                    </div>
+                    <p className="text-center text-xs text-gray-500">
+                      Scan to access badge ID: {selectedBufferSheet.id}
+                    </p>
+                  </div>
+
+                  {/* Performance Status */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium text-gray-500">Performance Status</Label>
+                    <div className="rounded-sm bg-gray-50 p-4">
+                      <div className="mb-2 flex items-center gap-3">
+                        <div
+                          className={`h-4 w-4 rounded-sm ${getPerformanceColor(selectedBufferSheet.performance)}`}
+                        ></div>
+                        <span className="text-lg font-semibold capitalize">
+                          {selectedBufferSheet.performance}
+                        </span>
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        {selectedBufferSheet.performance === 'excellent' &&
+                          'Outstanding performance with zero errors'}
+                        {selectedBufferSheet.performance === 'good' &&
+                          'Meeting all performance standards'}
+                        {selectedBufferSheet.performance === 'attention' &&
+                          'Requires monitoring and support'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Current Notes */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium text-gray-500">Current Notes</Label>
+                    <div className="min-h-[60px] rounded-sm bg-gray-50 p-3">
+                      {selectedBufferSheet.notes ? (
+                        <p className="text-sm">{selectedBufferSheet.notes}</p>
+                      ) : (
+                        <p className="text-sm text-gray-400 italic">No notes recorded</p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Add New Note */}
+                  <div className="space-y-3">
+                    <Label htmlFor="buffer-note" className="text-sm font-medium text-gray-500">
+                      Add New Note
+                    </Label>
+                    <Textarea
+                      id="buffer-note"
+                      placeholder="Enter observation, feedback, or note about this buffer associate..."
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                      className="min-h-[80px]"
+                    />
+                  </div>
+
+                  {/* Recent Activity */}
+                  <div className="space-y-3">
+                    <Label className="text-sm font-medium text-gray-500">Recent Activity</Label>
+                    <div className="space-y-2">
+                      <div className="rounded-sm bg-gray-50 p-2 text-sm">
+                        <div className="font-medium">Current shift: 6:00 AM - 2:30 PM</div>
+                        <div className="text-gray-600">
+                          Buffer coverage: {selectedBufferSheet.assignment}
+                        </div>
+                      </div>
+                      <div className="rounded-sm bg-gray-50 p-2 text-sm">
+                        <div className="font-medium">Last break: 10:15 AM - 10:30 AM</div>
+                        <div className="text-gray-600">15 minute break</div>
+                      </div>
+                      <div className="rounded-sm bg-gray-50 p-2 text-sm">
+                        <div className="font-medium">Packages caught: 12 in last hour</div>
+                        <div className="text-gray-600">Catch rate: 95%</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex gap-2 pt-4">
+                    <Button
+                      className="flex-1"
+                      onClick={() => {
+                        // In real app, save note to backend
+                        console.log(`Adding note for ${selectedBufferSheet.name}: ${notes}`)
+                        setNotes('')
+                      }}
+                      disabled={!notes.trim()}
+                    >
+                      <MessageSquare className="mr-2 h-4 w-4" />
+                      Save Note
+                    </Button>
+                    <Button variant="outline" className="flex-1 bg-transparent">
+                      <RefreshCw className="mr-2 h-4 w-4" />
+                      Refresh Data
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </SheetContent>
+          </Sheet>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
