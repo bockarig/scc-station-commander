@@ -710,11 +710,11 @@ export const Dashboard = () => {
 
           {/* Performance Summary Cards */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <Card className="border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
+            <Card className="from-gray-2 to-gray-4 border-brd-line bg-gradient-to-r">
               <CardContent className="rounded-sm p-4 px-2 py-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-700">Performing Well</p>
+                    <p className="text-cnt-secondary text-sm font-medium">Performing Well</p>
                     <p className="text-2xl font-bold">
                       {currentData.stowers.filter((s) => s.status === 'above').length +
                         currentData.buffers.filter(
@@ -723,34 +723,34 @@ export const Dashboard = () => {
                     </p>
                   </div>
                   <div className="bg-gray-3 rounded-lg p-2">
-                    <div className="h-6 w-6 rounded-sm bg-gray-700"></div>
+                    <div className="bg-gray-6 h-6 w-6 rounded-sm"></div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-brd-line bg-gradient-to-r from-gray-100 to-gray-200">
+            <Card className="border-brd-line from-gray-3 to-gray-5 bg-gradient-to-r">
               <CardContent className="rounded-sm p-4 px-3 py-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-cnt-primary/70 text-sm font-medium">Need Attention</p>
+                    <p className="text-cnt-secondary text-sm font-medium">Need Attention</p>
                     <p className="text-2xl font-bold">
                       {currentData.stowers.filter((s) => s.status === 'below').length +
                         currentData.buffers.filter((b) => b.performance === 'attention').length}
                     </p>
                   </div>
                   <div className="bg-gray-4 rounded-lg p-2">
-                    <div className="h-6 w-6 rounded-sm bg-gray-800"></div>
+                    <div className="bg-gray-8 h-6 w-6 rounded-sm"></div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
+            <Card className="from-gray-2 to-gray-4 border-brd-line bg-gradient-to-r">
               <CardContent className="rounded-sm p-4 px-3 py-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-700">Avg Stow Rate</p>
+                    <p className="text-cnt-secondary text-sm font-medium">Avg Stow Rate</p>
                     <p className="text-2xl font-bold">
                       {Math.round(
                         currentData.stowers.reduce((acc, s) => acc + s.currentRate, 0) /
@@ -760,7 +760,7 @@ export const Dashboard = () => {
                     </p>
                   </div>
                   <div className="bg-gray-3 rounded-lg p-2">
-                    <div className="h-6 w-6 rounded-sm bg-gray-700"></div>
+                    <div className="bg-gray-7 h-6 w-6 rounded-sm"></div>
                   </div>
                 </div>
               </CardContent>
