@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
+import { LaneCard } from '@/components/lane-card'
 
 import { KpiMetricsSection } from './kpi/kpi-metrics-section'
 
@@ -546,125 +547,18 @@ export const Dashboard = () => {
                     <div className="grid grid-cols-4 gap-3">
                       {currentData.lanes
                         .filter((lane) => lane.cluster === cluster)
-                        .map((lane) => {
-                          const isHighlighted =
-                            (selectedStowerSheet &&
-                              isLaneInAssignment(lane.id, selectedStowerSheet.assignment)) ||
-                            (selectedBufferSheet &&
-                              isLaneInAssignment(lane.id, selectedBufferSheet.assignment))
-
-                          const hasSelectedAssociate = selectedStowerSheet || selectedBufferSheet
-                          const isDeemphasized = hasSelectedAssociate && !isHighlighted
-
-                          // Get base status color
-                          const baseStatusColor = getStatusColor(lane.status)
-
-                          // Create highlighted version that preserves status color
-                          const getHighlightedColor = (status: string) => {
-                            switch (status) {
-                              case 'high':
-                                return 'bg-gray-400 border-gray-700 shadow-lg ring-2 ring-gray-500'
-                              case 'medium':
-                                return 'bg-gray-4 border-gray-600 shadow-lg ring-2 ring-gray-400'
-                              case 'attention':
-                                return 'bg-gray-4 border-gray-600 shadow-lg ring-2 ring-gray-400'
-                              case 'excellent':
-                                return 'bg-gray-3 border-gray-500 shadow-lg ring-2 ring-gray-300'
-                              default:
-                                return 'bg-gray-3 border-gray-600 shadow-lg ring-2 ring-gray-400'
+                        .map((lane) => (
+                          <LaneCard
+                            lane={lane}
+                            selectedStowerSheet={selectedStowerSheet}
+                            selectedBufferSheet={selectedBufferSheet}
+                            isLaneInAssignment={isLaneInAssignment}
+                            getStatusColor={getStatusColor}
+                            onClick={(laneId) =>
+                              console.log(`Lane ${laneId} clicked - show detailed view`)
                             }
-                          }
-
-                          return (
-                            <div
-                              key={lane.id}
-                              className={`group relative cursor-pointer rounded-sm border-2 p-3 text-center hover:shadow-md ${
-                                isHighlighted
-                                  ? `${getHighlightedColor(lane.status)} z-10`
-                                  : isDeemphasized
-                                    ? `${baseStatusColor} opacity-30 grayscale`
-                                    : baseStatusColor
-                              }`}
-                              onClick={() => {
-                                // Toggle lane details on click
-                                console.log(`Lane ${lane.id} clicked - show detailed view`)
-                              }}
-                            >
-                              {/* Add assignment indicator for highlighted lanes */}
-                              {isHighlighted && (
-                                <div className="absolute -top-1 -right-1 h-3 w-3 rounded-sm border-2 border-white bg-blue-600"></div>
-                              )}
-
-                              {/* Primary Info - Always Visible */}
-                              <div
-                                className={`text-sm font-medium ${isDeemphasized ? 'text-gray-400' : ''}`}
-                              >
-                                {lane.id}
-                              </div>
-
-                              {/* Capacity Status */}
-                              <div
-                                className={`mt-1 text-xs font-medium ${isDeemphasized ? 'text-gray-400' : lane.volume > lane.capacity * 0.8 ? 'text-red-700' : 'text-cnt-secondary'}`}
-                              >
-                                {Math.round((lane.volume / lane.capacity) * 100)}%
-                              </div>
-
-                              {/* Status Indicator */}
-                              {lane.status !== 'normal' && (
-                                <div
-                                  className={`absolute top-1 left-1 h-2 w-2 rounded-full ${
-                                    lane.status === 'high'
-                                      ? 'bg-red-500'
-                                      : lane.status === 'medium'
-                                        ? 'bg-yellow-500'
-                                        : 'bg-gray-400'
-                                  }`}
-                                ></div>
-                              )}
-
-                              {/* Progressive Disclosure - Show on Hover */}
-                              <div className="bg-opacity-75 absolute inset-0 flex flex-col items-center justify-center rounded-sm bg-black p-2 text-xs text-white opacity-0 group-hover:opacity-100">
-                                <div className="font-medium">
-                                  {lane.volume}/{lane.capacity} packages
-                                </div>
-                                <div className="mt-1">
-                                  {lane.status === 'high' && '⚠️ High Volume'}
-                                  {lane.status === 'medium' && '⚡ Moderate Load'}
-                                  {lane.status === 'normal' && '✅ Normal Flow'}
-                                </div>
-                                <div className="mt-1 text-center">
-                                  Est. clear: {Math.round(lane.volume / 15)}min
-                                </div>
-                              </div>
-
-                              {/* Capacity Bar */}
-                              <div className="bg-gray-3 mt-2 h-1.5 w-full rounded-sm">
-                                <div
-                                  className={`h-1.5 rounded-sm ${
-                                    isHighlighted
-                                      ? lane.status === 'high'
-                                        ? 'bg-gray-800'
-                                        : lane.status === 'medium'
-                                          ? 'bg-gray-700'
-                                          : lane.status === 'attention'
-                                            ? 'bg-gray-700'
-                                            : 'bg-gray-600'
-                                      : isDeemphasized
-                                        ? 'bg-gray-400'
-                                        : lane.volume > lane.capacity * 0.8
-                                          ? 'bg-red-500'
-                                          : lane.volume > lane.capacity * 0.6
-                                            ? 'bg-yellow-500'
-                                            : 'bg-gray-600'
-                                  }`}
-                                  style={{
-                                    width: `${Math.min((lane.volume / lane.capacity) * 100, 100)}%`,
-                                  }}
-                                ></div>
-                              </div>
-                            </div>
-                          )
-                        })}
+                          />
+                        ))}
                     </div>
                   </div>
                 </CardContent>
