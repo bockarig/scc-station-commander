@@ -397,28 +397,28 @@ function isLaneInAssignment(laneId: string, assignment: string): boolean {
 const getStatusColor = (status: string) => {
   switch (status) {
     case 'high':
-      return 'bg-gray-4 border-gray-500'
+      return 'bg-danger-5 border-danger-8'
     case 'medium':
-      return 'bg-gray-3 border-brd-ring'
+      return 'bg-(--amber-5) border-(--amber-8)'
     case 'attention':
-      return 'bg-gray-3 border-brd-ring'
+      return 'bg-(--orange-3) border-(--orange-8)'
     case 'excellent':
-      return 'bg-gray-100 border-brd-line'
+      return 'bg-(--green-3) border-(--green-8)'
     default:
-      return 'bg-gray-50 border-gray-200'
+      return 'bg-main border-brd-line'
   }
 }
 
 const getPerformanceColor = (performance: string) => {
   switch (performance) {
     case 'excellent':
-      return 'bg-gray-800'
+      return 'bg-(--green-9)'
     case 'good':
-      return 'bg-gray-600'
+      return 'bg-accent-9'
     case 'attention':
-      return 'bg-gray-400'
+      return 'bg-(--orange-9)'
     default:
-      return 'bg-gray-4'
+      return 'bg-gray-3'
   }
 }
 
@@ -486,7 +486,7 @@ export const Dashboard = () => {
           <p className="text-cnt-secondary">Process Assistant Overview</p>
         </div>
         <div className="flex items-center gap-4">
-          <Button className="bg-transparent leading-6" variant="secondary" size="sm">
+          <Button className="h-7 bg-transparent leading-6" variant="secondary">
             <RefreshCw className="mr-2 h-4 w-4" />
             Refresh Data
           </Button>
@@ -511,7 +511,7 @@ export const Dashboard = () => {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <TabsList className="grid grid-cols-6">
+            <TabsList variant="solid" className="grid grid-cols-6">
               <TabsTrigger value="AB">AB</TabsTrigger>
               <TabsTrigger value="CD">CD</TabsTrigger>
               <TabsTrigger value="EG">EG</TabsTrigger>
@@ -529,11 +529,11 @@ export const Dashboard = () => {
           {/* Lane Views */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {currentData.clusters.map((cluster) => (
-              <Card key={cluster} className="bg-gray-3 rounded-sm border-gray-200">
+              <Card key={cluster} className="bg-gray-3 border-brd-line rounded-sm">
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-xl">Cluster {cluster}</CardTitle>
-                    <Badge variant="secondary" className="bg-white text-sm">
+                    <Badge variant="neutral">
                       {currentData.lanes
                         .filter((lane) => lane.cluster === cluster)
                         .reduce((acc, lane) => acc + lane.volume, 0)}{' '}

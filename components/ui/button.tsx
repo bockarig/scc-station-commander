@@ -11,7 +11,7 @@ const buttonVariants = tv({
     // base
     control,
     'relative inline-flex items-center justify-center border whitespace-nowrap',
-    'text-center text-base/6 font-semibold shadow-sm [--tw-shadow-color:var(--color-black-a3)] lg:transition-all lg:duration-100 lg:ease-in-out',
+    'text-center text-base/6 font-semibold shadow-sm [--tw-shadow-color:var(--color-black-a3)]',
     // disabled
     'disabled:pointer-events-none disabled:shadow-none',
     // focus
