@@ -1,5 +1,3 @@
-// Tremor Switch [v1.0.0]
-
 import React from 'react'
 import { cx, focusRing } from '@/utils'
 import * as SwitchPrimitives from '@radix-ui/react-switch'
@@ -14,7 +12,7 @@ const switchVariants = tv({
       // ring color
       'ring-black/5 dark:ring-gray-800',
       // checked
-      'data-[state=checked]:bg-blue-500 dark:data-[state=checked]:bg-blue-500',
+      'data-[state=checked]:bg-black-a12 data-[state=checked]:dark:bg-white-a12',
       // disabled
       'data-disabled:cursor-default',
       // disabled checked
@@ -33,9 +31,9 @@ const switchVariants = tv({
     ],
     thumb: [
       // base
-      'pointer-events-none relative inline-block transform appearance-none rounded-full border-none shadow-lg outline-hidden transition-all duration-150 ease-in-out focus:border-none focus:outline-hidden focus:outline-transparent',
+      'pointer-events-none relative inline-block transform appearance-none rounded border-none shadow-lg outline-hidden transition-all duration-150 ease-in-out focus:border-none focus:outline-hidden focus:outline-transparent',
       // background color
-      'bg-white dark:bg-gray-50',
+      'bg-white-a12 dark:bg-black-a12',
       // disabled
       'group-data-disabled:shadow-none',
       'group-data-disabled:bg-gray-50 dark:group-data-disabled:bg-gray-500',

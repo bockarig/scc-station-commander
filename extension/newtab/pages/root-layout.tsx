@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router'
 
-import { Navigation } from '@/components/navigation.tsx'
 import { ThemeProvider } from '@/components/theme-provider'
+
+import { Navigation } from '../components/navigation.tsx'
 
 export const RootLayout = () => (
   <>

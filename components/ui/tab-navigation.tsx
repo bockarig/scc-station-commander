@@ -86,7 +86,7 @@ const TabNavigationLink = React.forwardRef<
             // hover
             'group-hover:text-cnt-primary',
             // border hover
-            'group-hover:border-brd-control',
+            'group-hover:border-brd-ring',
             // selected
             'group-data-[active]:border-brd-accent group-data-[active]:text-cnt-accent',
             // disabled

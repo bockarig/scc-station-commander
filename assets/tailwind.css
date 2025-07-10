@@ -19,3 +19,9 @@
 @plugin "@tailwindcss/forms";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  * {
+    @apply border-brd-line;
+  }
+}

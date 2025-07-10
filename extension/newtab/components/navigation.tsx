@@ -19,7 +19,7 @@ function Navigation() {
   // @ts-ignore
   const { pathname } = match
   return (
-    <div className="shadow-s bg-surface sticky top-0 z-20">
+    <div className="bg-page [--tw-shadow-color:var(--color-black-a2) sticky top-0 z-20 shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 pt-3 sm:px-6">
         <div className="flex items-center gap-2">
           <Logo className="text-accent-9 h-6" />
