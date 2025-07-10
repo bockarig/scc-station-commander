@@ -397,13 +397,13 @@ function isLaneInAssignment(laneId: string, assignment: string): boolean {
 const getStatusColor = (status: string) => {
   switch (status) {
     case 'high':
-      return 'bg-gray-300 border-gray-500'
+      return 'bg-gray-4 border-gray-500'
     case 'medium':
-      return 'bg-gray-200 border-gray-400'
+      return 'bg-gray-3 border-brd-ring'
     case 'attention':
-      return 'bg-gray-200 border-gray-400'
+      return 'bg-gray-3 border-brd-ring'
     case 'excellent':
-      return 'bg-gray-100 border-gray-300'
+      return 'bg-gray-100 border-brd-line'
     default:
       return 'bg-gray-50 border-gray-200'
   }
@@ -418,7 +418,7 @@ const getPerformanceColor = (performance: string) => {
     case 'attention':
       return 'bg-gray-400'
     default:
-      return 'bg-gray-300'
+      return 'bg-gray-4'
   }
 }
 
@@ -482,15 +482,15 @@ export const Dashboard = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Station Dashboard</h1>
-          <p className="text-gray-600">Process Assistant Overview</p>
+          <h1 className="text-3xl font-bold">Station Dashboard</h1>
+          <p className="text-cnt-secondary">Process Assistant Overview</p>
         </div>
         <div className="flex items-center gap-4">
-          <Button className="bg-transparent leading-6" variant="outline" size="sm">
+          <Button className="bg-transparent leading-6" variant="secondary" size="sm">
             <RefreshCw className="mr-2 h-4 w-4" />
             Refresh Data
           </Button>
-          <Badge variant="outline" className="rounded-none text-sm">
+          <Badge variant="neutral" className="rounded-none text-sm">
             <Clock className="mr-1 h-3 w-3" />
             Last updated: 2 min ago
           </Badge>
@@ -505,8 +505,8 @@ export const Dashboard = () => {
         {/* Lane Layout Section Header with Tabs */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-semibold text-gray-900">Cluster Details</h2>
-            <p className="mt-1 text-gray-600">
+            <h2 className="text-2xl font-semibold">Cluster Details</h2>
+            <p className="text-cnt-secondary mt-1">
               Select a cluster to view detailed lane status and associate management
             </p>
           </div>
@@ -529,7 +529,7 @@ export const Dashboard = () => {
           {/* Lane Views */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {currentData.clusters.map((cluster) => (
-              <Card key={cluster} className="rounded-sm border-gray-200 bg-gray-200">
+              <Card key={cluster} className="bg-gray-3 rounded-sm border-gray-200">
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-xl">Cluster {cluster}</CardTitle>
@@ -565,13 +565,13 @@ export const Dashboard = () => {
                               case 'high':
                                 return 'bg-gray-400 border-gray-700 shadow-lg ring-2 ring-gray-500'
                               case 'medium':
-                                return 'bg-gray-300 border-gray-600 shadow-lg ring-2 ring-gray-400'
+                                return 'bg-gray-4 border-gray-600 shadow-lg ring-2 ring-gray-400'
                               case 'attention':
-                                return 'bg-gray-300 border-gray-600 shadow-lg ring-2 ring-gray-400'
+                                return 'bg-gray-4 border-gray-600 shadow-lg ring-2 ring-gray-400'
                               case 'excellent':
-                                return 'bg-gray-200 border-gray-500 shadow-lg ring-2 ring-gray-300'
+                                return 'bg-gray-3 border-gray-500 shadow-lg ring-2 ring-gray-300'
                               default:
-                                return 'bg-gray-200 border-gray-600 shadow-lg ring-2 ring-gray-400'
+                                return 'bg-gray-3 border-gray-600 shadow-lg ring-2 ring-gray-400'
                             }
                           }
 
@@ -604,7 +604,7 @@ export const Dashboard = () => {
 
                               {/* Capacity Status */}
                               <div
-                                className={`mt-1 text-xs font-medium ${isDeemphasized ? 'text-gray-400' : lane.volume > lane.capacity * 0.8 ? 'text-red-700' : 'text-gray-600'}`}
+                                className={`mt-1 text-xs font-medium ${isDeemphasized ? 'text-gray-400' : lane.volume > lane.capacity * 0.8 ? 'text-red-700' : 'text-cnt-secondary'}`}
                               >
                                 {Math.round((lane.volume / lane.capacity) * 100)}%
                               </div>
@@ -638,7 +638,7 @@ export const Dashboard = () => {
                               </div>
 
                               {/* Capacity Bar */}
-                              <div className="mt-2 h-1.5 w-full rounded-sm bg-gray-200">
+                              <div className="bg-gray-3 mt-2 h-1.5 w-full rounded-sm">
                                 <div
                                   className={`h-1.5 rounded-sm transition-all ${
                                     isHighlighted
@@ -675,8 +675,8 @@ export const Dashboard = () => {
           {/* Associates Management Section Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-semibold text-gray-900">Associates Management</h2>
-              <p className="mt-1 text-gray-600">
+              <h2 className="text-2xl font-semibold">Associates Management</h2>
+              <p className="text-cnt-secondary mt-1">
                 Monitor performance and manage assignments across all roles
               </p>
             </div>
@@ -715,31 +715,31 @@ export const Dashboard = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-700">Performing Well</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-2xl font-bold">
                       {currentData.stowers.filter((s) => s.status === 'above').length +
                         currentData.buffers.filter(
                           (b) => b.performance === 'excellent' || b.performance === 'good',
                         ).length}
                     </p>
                   </div>
-                  <div className="rounded-lg bg-gray-200 p-2">
+                  <div className="bg-gray-3 rounded-lg p-2">
                     <div className="h-6 w-6 rounded-sm bg-gray-700"></div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-gray-300 bg-gradient-to-r from-gray-100 to-gray-200">
+            <Card className="border-brd-line bg-gradient-to-r from-gray-100 to-gray-200">
               <CardContent className="rounded-sm p-4 px-3 py-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-gray-800">Need Attention</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-cnt-primary/70 text-sm font-medium">Need Attention</p>
+                    <p className="text-2xl font-bold">
                       {currentData.stowers.filter((s) => s.status === 'below').length +
                         currentData.buffers.filter((b) => b.performance === 'attention').length}
                     </p>
                   </div>
-                  <div className="rounded-lg bg-gray-300 p-2">
+                  <div className="bg-gray-4 rounded-lg p-2">
                     <div className="h-6 w-6 rounded-sm bg-gray-800"></div>
                   </div>
                 </div>
@@ -751,7 +751,7 @@ export const Dashboard = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-700">Avg Stow Rate</p>
-                    <p className="text-2xl font-bold text-gray-900">
+                    <p className="text-2xl font-bold">
                       {Math.round(
                         currentData.stowers.reduce((acc, s) => acc + s.currentRate, 0) /
                           currentData.stowers.length,
@@ -759,7 +759,7 @@ export const Dashboard = () => {
                       /hr
                     </p>
                   </div>
-                  <div className="rounded-lg bg-gray-200 p-2">
+                  <div className="bg-gray-3 rounded-lg p-2">
                     <div className="h-6 w-6 rounded-sm bg-gray-700"></div>
                   </div>
                 </div>
@@ -782,8 +782,8 @@ export const Dashboard = () => {
                       swapMode && selectedForSwap.includes(stower.id)
                         ? 'border-gray-600 bg-gray-100'
                         : stower.status === 'below'
-                          ? 'border-gray-400 bg-gray-100/50 hover:border-gray-500'
-                          : 'border-gray-200 hover:border-gray-300'
+                          ? 'border-brd-ring bg-gray-100/50 hover:border-gray-500'
+                          : 'hover:border-brd-line border-gray-200'
                     }`}
                     onClick={() => {
                       if (swapMode) {
@@ -802,21 +802,21 @@ export const Dashboard = () => {
                         <div className="flex items-center gap-2">
                           <div className="h-3 w-3 rounded-sm bg-gray-700"></div>
                           <Badge
-                            variant="outline"
-                            className="border-gray-300 bg-gray-50 text-xs text-gray-700"
+                            variant="neutral"
+                            className="border-brd-line bg-gray-50 text-xs text-gray-700"
                           >
                             Stower
                           </Badge>
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900">{stower.name}</div>
-                          <div className="text-sm text-gray-600">{stower.assignment}</div>
+                          <div className="font-medium">{stower.name}</div>
+                          <div className="text-cnt-secondary text-sm">{stower.assignment}</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="text-right">
                           <div
-                            className={`font-bold ${stower.status === 'above' ? 'text-gray-900' : 'text-gray-700'}`}
+                            className={`font-bold ${stower.status === 'above' ? 'text-cnt-primary' : 'text-gray-700'}`}
                           >
                             {stower.currentRate}/hr
                           </div>
@@ -826,8 +826,8 @@ export const Dashboard = () => {
                           variant={stower.status === 'above' ? 'default' : 'secondary'}
                           className={
                             stower.status === 'above'
-                              ? 'border-gray-300 bg-gray-200 text-gray-900'
-                              : 'border-gray-400 bg-gray-300 text-gray-800'
+                              ? 'border-brd-line bg-gray-3 text-cnt-primary'
+                              : 'border-brd-ring bg-gray-4 text-cnt-primary/70'
                           }
                         >
                           {stower.status === 'above' ? 'Above Target' : 'Below Target'}
@@ -843,10 +843,10 @@ export const Dashboard = () => {
                     key={buffer.id}
                     className={`cursor-pointer rounded-sm border p-4 transition-all hover:shadow-md ${
                       buffer.performance === 'attention'
-                        ? 'border-gray-400 bg-gray-100/50 hover:border-gray-500'
+                        ? 'border-brd-ring bg-gray-100/50 hover:border-gray-500'
                         : buffer.performance === 'excellent'
-                          ? 'border-gray-300 bg-gray-50/50 hover:border-gray-400'
-                          : 'border-gray-200 hover:border-gray-300'
+                          ? 'hover:border-brd-ring border-brd-line bg-gray-50/50'
+                          : 'hover:border-brd-line border-gray-200'
                     }`}
                     onClick={() => setSelectedBufferSheet(buffer)}
                   >
@@ -855,15 +855,15 @@ export const Dashboard = () => {
                         <div className="flex items-center gap-2">
                           <div className="h-3 w-3 rounded-sm bg-gray-600"></div>
                           <Badge
-                            variant="outline"
-                            className="border-gray-300 bg-gray-50 text-xs text-gray-700"
+                            variant="neutral"
+                            className="border-brd-line bg-gray-50 text-xs text-gray-700"
                           >
                             Buffer
                           </Badge>
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900">{buffer.name}</div>
-                          <div className="text-sm text-gray-600">{buffer.assignment}</div>
+                          <div className="font-medium">{buffer.name}</div>
+                          <div className="text-cnt-secondary text-sm">{buffer.assignment}</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
@@ -873,13 +873,13 @@ export const Dashboard = () => {
                           </div>
                         )}
                         <Badge
-                          variant="outline"
+                          variant="neutral"
                           className={
                             buffer.performance === 'excellent'
-                              ? 'border-gray-300 bg-gray-200 text-gray-900'
+                              ? 'border-brd-line bg-gray-3 text-cnt-primary'
                               : buffer.performance === 'attention'
-                                ? 'border-gray-400 bg-gray-300 text-gray-800'
-                                : 'border-gray-200 bg-gray-100 text-gray-800'
+                                ? 'border-brd-ring bg-gray-4 text-cnt-primary/70'
+                                : 'text-cnt-primary/70 border-gray-200 bg-gray-100'
                           }
                         >
                           {buffer.performance === 'excellent'
@@ -944,28 +944,26 @@ export const Dashboard = () => {
                     <Label className="text-sm font-medium text-gray-500">Performance</Label>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="rounded-sm bg-gray-50 p-3">
-                        <div className="text-sm text-gray-600">Current Rate</div>
+                        <div className="text-cnt-secondary text-sm">Current Rate</div>
                         <div
-                          className={`text-xl font-bold ${selectedStowerSheet.status === 'above' ? 'text-gray-900' : 'text-gray-700'}`}
+                          className={`text-xl font-bold ${selectedStowerSheet.status === 'above' ? 'text-cnt-primary' : 'text-gray-700'}`}
                         >
                           {selectedStowerSheet.currentRate}/hr
                         </div>
                       </div>
                       <div className="rounded-sm bg-gray-50 p-3">
-                        <div className="text-sm text-gray-600">Target Rate</div>
-                        <div className="text-xl font-bold text-gray-900">
-                          {selectedStowerSheet.target}/hr
-                        </div>
+                        <div className="text-cnt-secondary text-sm">Target Rate</div>
+                        <div className="text-xl font-bold">{selectedStowerSheet.target}/hr</div>
                       </div>
                     </div>
                     <div className="rounded-sm bg-gray-50 p-3">
-                      <div className="text-sm text-gray-600">Status</div>
+                      <div className="text-cnt-secondary text-sm">Status</div>
                       <Badge
                         variant={selectedStowerSheet.status === 'above' ? 'default' : 'secondary'}
                         className={
                           selectedStowerSheet.status === 'above'
-                            ? 'border-gray-300 bg-gray-200 text-gray-900'
-                            : 'border-gray-400 bg-gray-300 text-gray-800'
+                            ? 'border-brd-line bg-gray-3 text-cnt-primary'
+                            : 'border-brd-ring bg-gray-4 text-cnt-primary/70'
                         }
                       >
                         {selectedStowerSheet.status === 'above' ? 'Above Target' : 'Below Target'}
@@ -981,22 +979,22 @@ export const Dashboard = () => {
                         <div className="font-medium">
                           Last Hour: {selectedStowerSheet.currentRate} packages
                         </div>
-                        <div className="text-gray-600">Started shift at 6:00 AM</div>
+                        <div className="text-cnt-secondary">Started shift at 6:00 AM</div>
                       </div>
                       <div className="rounded-sm bg-gray-50 p-2 text-sm">
                         <div className="font-medium">Break taken: 10:15 AM - 10:30 AM</div>
-                        <div className="text-gray-600">15 minute break</div>
+                        <div className="text-cnt-secondary">15 minute break</div>
                       </div>
                     </div>
                   </div>
 
                   {/* Action Buttons */}
                   <div className="flex gap-2 pt-4">
-                    <Button variant="outline" className="flex-1 bg-transparent">
+                    <Button variant="secondary" className="flex-1 bg-transparent">
                       <MessageSquare className="mr-2 h-4 w-4" />
                       Add Note
                     </Button>
-                    <Button variant="outline" className="flex-1 bg-transparent">
+                    <Button variant="secondary" className="flex-1 bg-transparent">
                       <RefreshCw className="mr-2 h-4 w-4" />
                       Refresh Data
                     </Button>
@@ -1060,7 +1058,7 @@ export const Dashboard = () => {
                           {selectedBufferSheet.performance}
                         </span>
                       </div>
-                      <div className="text-sm text-gray-600">
+                      <div className="text-cnt-secondary text-sm">
                         {selectedBufferSheet.performance === 'excellent' &&
                           'Outstanding performance with zero errors'}
                         {selectedBufferSheet.performance === 'good' &&
@@ -1103,17 +1101,17 @@ export const Dashboard = () => {
                     <div className="space-y-2">
                       <div className="rounded-sm bg-gray-50 p-2 text-sm">
                         <div className="font-medium">Current shift: 6:00 AM - 2:30 PM</div>
-                        <div className="text-gray-600">
+                        <div className="text-cnt-secondary">
                           Buffer coverage: {selectedBufferSheet.assignment}
                         </div>
                       </div>
                       <div className="rounded-sm bg-gray-50 p-2 text-sm">
                         <div className="font-medium">Last break: 10:15 AM - 10:30 AM</div>
-                        <div className="text-gray-600">15 minute break</div>
+                        <div className="text-cnt-secondary">15 minute break</div>
                       </div>
                       <div className="rounded-sm bg-gray-50 p-2 text-sm">
                         <div className="font-medium">Packages caught: 12 in last hour</div>
-                        <div className="text-gray-600">Catch rate: 95%</div>
+                        <div className="text-cnt-secondary">Catch rate: 95%</div>
                       </div>
                     </div>
                   </div>
@@ -1132,7 +1130,7 @@ export const Dashboard = () => {
                       <MessageSquare className="mr-2 h-4 w-4" />
                       Save Note
                     </Button>
-                    <Button variant="outline" className="flex-1 bg-transparent">
+                    <Button variant="secondary" className="flex-1 bg-transparent">
                       <RefreshCw className="mr-2 h-4 w-4" />
                       Refresh Data
                     </Button>
