@@ -1,3 +1,5 @@
+import { getDefaultStatusColors } from '@/config'
+
 interface LaneCardProps {
   lane: {
     id: string
@@ -9,7 +11,7 @@ interface LaneCardProps {
   selectedStowerSheet: any
   selectedBufferSheet: any
   isLaneInAssignment: (laneId: string, assignment: string) => boolean
-  getStatusColor: (status: string) => string
+  getStatusColor?: (status: string) => string
   onClick?: (laneId: string) => void
 }
 
@@ -25,10 +27,10 @@ const getHighlightedColor = (status: string): string => {
 
 const getStatusIndicatorColor = (status: string): string => {
   const statusColors: Record<string, string> = {
-    high: 'bg-red-500',
-    medium: 'bg-yellow-500',
+    high: 'bg-danger-9',
+    medium: 'bg-info-9',
   }
-  return statusColors[status] || 'bg-gray-400'
+  return statusColors[status] || 'bg-gray-9'
 }
 
 const getStatusMessage = (status: string): string => {
@@ -59,9 +61,9 @@ const calculateCapacityBarColor = (
   }
 
   const utilizationRatio = lane.volume / lane.capacity
-  if (utilizationRatio > 0.8) return 'bg-red-500'
-  if (utilizationRatio > 0.6) return 'bg-yellow-500'
-  return 'bg-gray-600'
+  if (utilizationRatio > 0.8) return 'bg-brd-danger'
+  if (utilizationRatio > 0.6) return 'bg-brd-warning'
+  return 'bg-brd-control'
 }
 
 export const LaneCard = ({
@@ -78,7 +80,9 @@ export const LaneCard = ({
 
   const hasSelectedAssociate = selectedStowerSheet || selectedBufferSheet
   const isDeemphasized = hasSelectedAssociate && !isHighlighted
-  const baseStatusColor = getStatusColor(lane.status)
+  const baseStatusColor = getStatusColor
+    ? getStatusColor(lane.status)
+    : getDefaultStatusColors(lane.status)
   const capacityPercentage = Math.round((lane.volume / lane.capacity) * 100)
   const isHighCapacity = lane.volume > lane.capacity * 0.8
   const estimatedClearTime = Math.round(lane.volume / 15)

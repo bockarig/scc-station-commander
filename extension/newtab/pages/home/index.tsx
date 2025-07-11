@@ -395,21 +395,6 @@ function isLaneInAssignment(laneId: string, assignment: string): boolean {
   return laneCluster === startCluster && laneStartNum >= startNumber && laneEndNum <= endNumber
 }
 
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case 'high':
-      return 'bg-danger-5 border-danger-8'
-    case 'medium':
-      return 'bg-(--amber-5) border-(--amber-8)'
-    case 'attention':
-      return 'bg-(--orange-3) border-(--orange-8)'
-    case 'excellent':
-      return 'bg-(--green-3) border-(--green-8)'
-    default:
-      return 'bg-main border-brd-line'
-  }
-}
-
 const getPerformanceColor = (performance: string) => {
   switch (performance) {
     case 'excellent':
@@ -553,7 +538,6 @@ export const Dashboard = () => {
                             selectedStowerSheet={selectedStowerSheet}
                             selectedBufferSheet={selectedBufferSheet}
                             isLaneInAssignment={isLaneInAssignment}
-                            getStatusColor={getStatusColor}
                             onClick={(laneId) =>
                               console.log(`Lane ${laneId} clicked - show detailed view`)
                             }

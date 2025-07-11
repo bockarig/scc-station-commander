@@ -25,8 +25,8 @@ const mockIsLaneInAssignment = (laneId: string, assignment: string) => {
 const mockGetStatusColor = (status: string) => {
   const statusColors: Record<string, string> = {
     high: 'bg-danger-soft border-brd-danger',
-    medium: 'bg-warning-soft border-brd-warning',
-    attention: 'bg-info-soft border-brd-info',
+    medium: 'bg-info-soft border-brd-info',
+    attention: 'bg-warning-soft border-brd-warning',
     excellent: 'bg-success-soft border-brd-success',
     normal: 'bg-gray-2 border-brd-control',
   }

@@ -61,9 +61,9 @@
   --brd-control: var(--gray-7);
   --brd-ring: var(--gray-8);
 
-  --brd-accent: var(--accent-8);
-  --brd-info: var(--amber-8);
-  --brd-success: var(--green-8);
+  --brd-accent: var(--color-accent-8);
+  --brd-info: var(--color-info-8);
+  --brd-success: var(--color-success-8);
   --brd-warning: var(--color-warning-8);
   --brd-danger: var(--color-danger-8);
 
