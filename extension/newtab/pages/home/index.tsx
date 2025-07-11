@@ -528,7 +528,7 @@ export const Dashboard = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <div className="rounded-sm border border-none border-gray-200 p-6">
+                  <div className="rounded-sm">
                     <div className="grid grid-cols-4 gap-3">
                       {currentData.lanes
                         .filter((lane) => lane.cluster === cluster)
