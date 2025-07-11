@@ -89,7 +89,7 @@ export const LaneCard = ({
 
   const getClassName = (): string => {
     const baseClasses =
-      'group relative cursor-pointer rounded-sm border-2 p-3 text-center hover:shadow-md'
+      'group relative cursor-pointer rounded border-2 p-3 text-center hover:shadow-md'
 
     if (isHighlighted) {
       return `${baseClasses} ${getHighlightedColor(lane.status)} z-10`
@@ -113,7 +113,7 @@ export const LaneCard = ({
   return (
     <div key={lane.id} className={getClassName()} onClick={handleClick}>
       {isHighlighted && (
-        <div className="absolute -top-1 -right-1 h-3 w-3 rounded-sm border-2 border-white bg-blue-600"></div>
+        <div className="absolute -top-1 -right-1 h-3 w-3 rounded border-2 border-white bg-blue-600"></div>
       )}
 
       <div className={`text-sm font-medium ${isDeemphasized ? 'text-gray-400' : ''}`}>
@@ -134,7 +134,7 @@ export const LaneCard = ({
         ></div>
       )}
 
-      <div className="bg-opacity-75 absolute inset-0 flex flex-col items-center justify-center rounded-sm bg-black p-2 text-xs text-white opacity-0 group-hover:opacity-100">
+      <div className="bg-opacity-75 absolute inset-0 flex flex-col items-center justify-center rounded bg-black p-2 text-xs text-white opacity-0 group-hover:opacity-100">
         <div className="font-medium">
           {lane.volume}/{lane.capacity} packages
         </div>
@@ -142,9 +142,9 @@ export const LaneCard = ({
         <div className="mt-1 text-center">Est. clear: {estimatedClearTime}min</div>
       </div>
 
-      <div className="bg-gray-3 mt-2 h-1.5 w-full rounded-sm">
+      <div className="bg-gray-3 mt-2 h-1.5 w-full rounded">
         <div
-          className={`h-1.5 rounded-sm ${calculateCapacityBarColor(lane, isHighlighted, isDeemphasized)}`}
+          className={`h-1.5 rounded ${calculateCapacityBarColor(lane, isHighlighted, isDeemphasized)}`}
           style={{ width: `${Math.min(capacityPercentage, 100)}%` }}
         ></div>
       </div>

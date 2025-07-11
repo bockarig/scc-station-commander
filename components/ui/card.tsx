@@ -6,7 +6,7 @@ function Card({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="card"
       className={cx(
-        'bg-main text-cnt-primary flex flex-col gap-6 rounded-lg border py-6 shadow-xs',
+        'bg-main text-cnt-primary flex flex-col gap-6 rounded-lg py-6 shadow-sm ring-1 [--tw-ring-color:var(--color-black-a3)]',
         className,
       )}
       {...props}

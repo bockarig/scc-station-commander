@@ -515,7 +515,7 @@ export const Dashboard = () => {
           {/* Lane Views */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {currentData.clusters.map((cluster) => (
-              <Card key={cluster} className="bg-gray-3 border-brd-line rounded-sm">
+              <Card key={cluster} className="bg-gray-3 border-brd-line">
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-xl">Cluster {cluster}</CardTitle>
@@ -561,11 +561,11 @@ export const Dashboard = () => {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-sm bg-gray-700"></div>
+                  <div className="w-3rounded h-3 bg-gray-700"></div>
                   <span>Stowers ({currentData.stowers.length})</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-sm bg-gray-600"></div>
+                  <div className="w-3rounded h-3 bg-gray-600"></div>
                   <span>Buffers ({currentData.buffers.length})</span>
                 </div>
               </div>
@@ -601,7 +601,7 @@ export const Dashboard = () => {
                     </p>
                   </div>
                   <div className="bg-gray-3 rounded-lg p-2">
-                    <div className="bg-gray-6 h-6 w-6 rounded-sm"></div>
+                    <div className="bg-gray-6 w-6rounded h-6"></div>
                   </div>
                 </div>
               </CardContent>
@@ -618,7 +618,7 @@ export const Dashboard = () => {
                     </p>
                   </div>
                   <div className="bg-gray-4 rounded-lg p-2">
-                    <div className="bg-gray-8 h-6 w-6 rounded-sm"></div>
+                    <div className="bg-gray-8 w-6rounded h-6"></div>
                   </div>
                 </div>
               </CardContent>
@@ -638,7 +638,7 @@ export const Dashboard = () => {
                     </p>
                   </div>
                   <div className="bg-gray-3 rounded-lg p-2">
-                    <div className="bg-gray-7 h-6 w-6 rounded-sm"></div>
+                    <div className="bg-gray-7 w-6rounded h-6"></div>
                   </div>
                 </div>
               </CardContent>
@@ -656,7 +656,7 @@ export const Dashboard = () => {
                 {currentData.stowers.map((stower) => (
                   <div
                     key={stower.id}
-                    className={`border-brd-line cursor-pointer rounded-sm border p-4 hover:shadow-md ${
+                    className={`border-brd-line cursor-pointerrounded border p-4 hover:shadow-md ${
                       swapMode && selectedForSwap.includes(stower.id)
                         ? 'border-gray-600 bg-pink-500'
                         : stower.status === 'below'
@@ -678,7 +678,7 @@ export const Dashboard = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2">
-                          <div className="h-3 w-3 rounded-sm bg-gray-700"></div>
+                          <div className="w-3rounded h-3 bg-gray-700"></div>
                           <Badge
                             variant="neutral"
                             className="border-brd-line bg-gray-50 text-xs text-gray-700"
@@ -719,7 +719,7 @@ export const Dashboard = () => {
                 {currentData.buffers.map((buffer) => (
                   <div
                     key={buffer.id}
-                    className={`cursor-pointer rounded-sm border p-4 hover:shadow-md ${
+                    className={`cursor-pointerrounded border p-4 hover:shadow-md ${
                       buffer.performance === 'attention'
                         ? 'border-brd-ring bg-gray-100/50 hover:border-gray-500'
                         : buffer.performance === 'excellent'
@@ -731,7 +731,7 @@ export const Dashboard = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2">
-                          <div className="h-3 w-3 rounded-sm bg-gray-600"></div>
+                          <div className="w-3rounded h-3 bg-gray-600"></div>
                           <Badge
                             variant="neutral"
                             className="border-brd-line bg-gray-50 text-xs text-gray-700"
@@ -746,7 +746,7 @@ export const Dashboard = () => {
                       </div>
                       <div className="flex items-center gap-4">
                         {buffer.notes && (
-                          <div className="max-w-xs truncate rounded-sm bg-gray-100 px-2 py-1 text-xs text-gray-500">
+                          <div className="truncaterounded max-w-xs bg-gray-100 px-2 py-1 text-xs text-gray-500">
                             {buffer.notes}
                           </div>
                         )}
@@ -805,7 +805,7 @@ export const Dashboard = () => {
                   {/* QR Code */}
                   <div className="space-y-3">
                     <Label className="text-sm font-medium text-gray-500">Badge QR Code</Label>
-                    <div className="flex justify-center rounded-sm border-2 border-gray-200 bg-white p-4">
+                    <div className="justify-centerrounded flex border-2 border-gray-200 bg-white p-4">
                       <img
                         src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${selectedStowerSheet.id}`}
                         alt={`QR Code for ${selectedStowerSheet.id}`}
@@ -912,7 +912,7 @@ export const Dashboard = () => {
                   {/* QR Code */}
                   <div className="space-y-3">
                     <Label className="text-sm font-medium text-gray-500">Badge QR Code</Label>
-                    <div className="flex justify-center rounded-sm border-2 border-gray-200 bg-white p-4">
+                    <div className="justify-centerrounded flex border-2 border-gray-200 bg-white p-4">
                       <img
                         src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${selectedBufferSheet.id}`}
                         alt={`QR Code for ${selectedBufferSheet.id}`}
@@ -930,7 +930,7 @@ export const Dashboard = () => {
                     <div className="rounded-sm bg-gray-50 p-4">
                       <div className="mb-2 flex items-center gap-3">
                         <div
-                          className={`h-4 w-4 rounded-sm ${getPerformanceColor(selectedBufferSheet.performance)}`}
+                          className={`w-4rounded h-4 ${getPerformanceColor(selectedBufferSheet.performance)}`}
                         ></div>
                         <span className="text-lg font-semibold capitalize">
                           {selectedBufferSheet.performance}
@@ -950,7 +950,7 @@ export const Dashboard = () => {
                   {/* Current Notes */}
                   <div className="space-y-3">
                     <Label className="text-sm font-medium text-gray-500">Current Notes</Label>
-                    <div className="min-h-[60px] rounded-sm bg-gray-50 p-3">
+                    <div className="min-h-[60px] rounded bg-gray-50 p-3">
                       {selectedBufferSheet.notes ? (
                         <p className="text-sm">{selectedBufferSheet.notes}</p>
                       ) : (
