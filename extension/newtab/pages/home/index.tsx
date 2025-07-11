@@ -508,7 +508,7 @@ export const Dashboard = () => {
           </div>
         </div>
 
-        <TabsContent value={selectedCluster} className="mt-6 space-y-6">
+        <TabsContent value={selectedCluster} className="mt-6 space-y-6 md:mt-12">
           {/* KPI Metrics Section */}
 
           {/* Lane Layout Section Header */}
