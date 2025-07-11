@@ -6,7 +6,7 @@ const meta: Meta<typeof LaneCard> = {
   title: 'Components/LaneCard',
   component: LaneCard,
   parameters: {
-    layout: 'centered',
+    // layout: 'centered',
   },
   tags: ['autodocs'],
   argTypes: {
@@ -24,11 +24,11 @@ const mockIsLaneInAssignment = (laneId: string, assignment: string) => {
 
 const mockGetStatusColor = (status: string) => {
   const statusColors: Record<string, string> = {
-    high: 'bg-red-100 border-red-300',
-    medium: 'bg-yellow-100 border-yellow-300',
-    attention: 'bg-orange-100 border-orange-300',
-    excellent: 'bg-green-100 border-green-300',
-    normal: 'bg-gray-100 border-gray-300',
+    high: 'bg-danger-soft border-brd-danger',
+    medium: 'bg-warning-soft border-brd-warning',
+    attention: 'bg-info-soft border-brd-info',
+    excellent: 'bg-success-soft border-brd-success',
+    normal: 'bg-gray-2 border-brd-control',
   }
   return statusColors[status] || 'bg-gray-100 border-gray-300'
 }

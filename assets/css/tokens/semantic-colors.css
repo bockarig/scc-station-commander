@@ -16,24 +16,24 @@
   /** Base Tokens **/
   /* Contents */
   --cnt-primary: var(--gray-12);
-  --cnt-secondary: #5d5e60;
-  --cnt-tertiary: #a2a5a9;
+  --cnt-secondary: var(--gray-11);
+  --cnt-tertiary: var(--gray-10);
   --cnt-on-inverse: var(--white-a12);
 
   --cnt-accent: var(--accent-11);
   --cnt-accent-bold: var(--accent-9);
 
-  --cnt-info: var(--info-11);
-  --cnt-info-bold: var(--info-9);
+  --cnt-info: var(--color-info-11);
+  --cnt-info-bold: var(--color-info-9);
 
-  --cnt-success: var(--success-11);
-  --cnt-success-bold: var(--success-9);
+  --cnt-success: var(--color-success-11);
+  --cnt-success-bold: var(--color-success-9);
 
-  --cnt-warning: var(--warning-11);
-  --cnt-warning-bold: var(--warning-9);
+  --cnt-warning: var(--color-warning-11);
+  --cnt-warning-bold: var(--color-warning-9);
 
-  --cnt-danger: var(--danger-11);
-  --cnt-danger-bold: var(--danger-9);
+  --cnt-danger: var(--color-danger-11);
+  --cnt-danger-bold: var(--color-danger-9);
 
   /* Backgrounds */
   --bg-surface: oklch(1 0 0);
@@ -44,17 +44,17 @@
   --bg-accent-soft: var(--accent-3);
   --bg-accent-bold: var(--accent-10);
 
-  --bg-info-soft: var(--accent-3);
-  --bg-info-bold: var(--amber-9);
+  --bg-info-soft: var(--color-info-3);
+  --bg-info-bold: var(--color-info-9);
 
-  --bg-success-soft: var(--green-3);
-  --bg-success-bold: var(--green-9);
+  --bg-success-soft: var(--color-success-3);
+  --bg-success-bold: var(--color-success-9);
 
-  --bg-warning-soft: var(--amber-3);
-  --bg-warning-bold: var(--amber-9);
+  --bg-warning-soft: var(--color-warning-3);
+  --bg-warning-bold: var(--color-warning-9);
 
-  --bg-danger-soft: var(--red-3);
-  --bg-danger-bold: var(--red-9);
+  --bg-danger-soft: var(--color-danger-3);
+  --bg-danger-bold: var(--color-danger-9);
 
   /* Borders */
   --brd-line: var(--gray-5);
@@ -64,8 +64,8 @@
   --brd-accent: var(--accent-8);
   --brd-info: var(--amber-8);
   --brd-success: var(--green-8);
-  --brd-warning: var(--amber-8);
-  --brd-danger: var(--red-8);
+  --brd-warning: var(--color-warning-8);
+  --brd-danger: var(--color-danger-8);
 
   /* Page Backgrounds */
   --bg-page: oklch(1 0 0);
@@ -139,117 +139,117 @@
 
   /** Base Tokens **/
   /* Contents */
-  --cnt-primary: var(--gray-12);
-  --cnt-secondary: #5d5e60;
-  --cnt-tertiary: #a2a5a9;
+  /*--cnt-primary: var(--gray-12);*/
+  /*--cnt-secondary: #5d5e60;*/
+  /*--cnt-tertiary: #a2a5a9;*/
   --cnt-on-inverse: var(--white-a12);
 
-  --cnt-accent: var(--accent-11);
-  --cnt-accent-bold: var(--accent-9);
+  /*--cnt-accent: var(--accent-11);*/
+  /*--cnt-accent-bold: var(--accent-9);*/
 
-  --cnt-info: var(--info-11);
-  --cnt-info-bold: var(--info-9);
+  /*--cnt-info: var(--info-11);*/
+  /*--cnt-info-bold: var(--info-9);*/
 
-  --cnt-success: var(--success-11);
-  --cnt-success-bold: var(--success-9);
+  /*--cnt-success: var(--success-11);*/
+  /*--cnt-success-bold: var(--success-9);*/
 
-  --cnt-warning: var(--warning-11);
-  --cnt-warning-bold: var(--warning-9);
+  /*--cnt-warning: var(--warning-11);*/
+  /*--cnt-warning-bold: var(--warning-9);*/
 
-  --cnt-danger: var(--danger-11);
-  --cnt-danger-bold: var(--danger-9);
+  /*--cnt-danger: var(--danger-11);*/
+  /*--cnt-danger-bold: var(--danger-9);*/
 
   /* Backgrounds */
-  --bg-surface: oklch(1 0 0);
-  --bg-panel: oklch(1 0 0);
-  --bg-soft: var(--gray-3);
-  --bg-inverse: var(--black-a12);
+  /*--bg-surface: oklch(1 0 0);*/
+  /*--bg-panel: oklch(1 0 0);*/
+  /*--bg-soft: var(--gray-3);*/
+  /*--bg-inverse: var(--black-a12);*/
 
-  --bg-accent-soft: var(--accent-3);
-  --bg-accent-bold: var(--accent-10);
+  /*--bg-accent-soft: var(--accent-3);*/
+  /*--bg-accent-bold: var(--accent-10);*/
 
-  --bg-info-soft: var(--accent-3);
-  --bg-info-bold: var(--amber-9);
+  /*--bg-info-soft: var(--accent-3);*/
+  /*--bg-info-bold: var(--amber-9);*/
 
-  --bg-success-soft: var(--green-3);
-  --bg-success-bold: var(--green-9);
+  /*--bg-success-soft: var(--green-3);*/
+  /*--bg-success-bold: var(--green-9);*/
 
-  --bg-warning-soft: var(--amber-3);
-  --bg-warning-bold: var(--amber-9);
+  /*--bg-warning-soft: var(--amber-3);*/
+  /*--bg-warning-bold: var(--amber-9);*/
 
-  --bg-danger-soft: var(--red-3);
-  --bg-danger-bold: var(--red-9);
+  /*--bg-danger-soft: var(--red-3);*/
+  /*--bg-danger-bold: var(--red-9);*/
 
   /* Borders */
-  --brd-line: var(--gray-5);
-  --brd-control: var(--gray-7);
-  --brd-ring: var(--gray-8);
+  /*--brd-line: var(--gray-5);*/
+  /*--brd-control: var(--gray-7);*/
+  /*--brd-ring: var(--gray-8);*/
 
-  --brd-accent: var(--accent-8);
-  --brd-info: var(--amber-8);
-  --brd-success: var(--green-8);
-  --brd-warning: var(--amber-8);
-  --brd-danger: var(--red-8);
+  /*--brd-accent: var(--accent-8);*/
+  /*--brd-info: var(--amber-8);*/
+  /*--brd-success: var(--green-8);*/
+  /*--brd-warning: var(--amber-8);*/
+  /*--brd-danger: var(--red-8);*/
 
   /* Page Backgrounds */
-  --bg-page: oklch(1 0 0);
-  --bg-page-alternative: var(--gray-2);
+  /*--bg-page: oklch(1 0 0);*/
+  /*--bg-page-alternative: var(--gray-2);*/
 
   /* -———————————————————————————————————————————- */
 
   /** State Tokens **/
   /* Contents */
-  --cnt-accent-hover: #7910ff;
-  --cnt-accent-pressed: #7910ff;
+  /*--cnt-accent-hover: #7910ff;*/
+  /*--cnt-accent-pressed: #7910ff;*/
 
-  --cnt-info-hover: #0068d6;
-  --cnt-info-pressed: #0063cc;
+  /*--cnt-info-hover: #0068d6;*/
+  /*--cnt-info-pressed: #0063cc;*/
 
-  --cnt-success-hover: #0c7e3a;
-  --cnt-success-pressed: #0b7938;
+  /*--cnt-success-hover: #0c7e3a;*/
+  /*--cnt-success-pressed: #0b7938;*/
 
-  --cnt-warning-hover: #c23d00;
-  --cnt-warning-pressed: #c23d00;
+  /*--cnt-warning-hover: #c23d00;*/
+  /*--cnt-warning-pressed: #c23d00;*/
 
-  --cnt-danger-hover: #d60017;
-  --cnt-danger-pressed: #cc0016;
+  /*--cnt-danger-hover: #d60017;*/
+  /*--cnt-danger-pressed: #cc0016;*/
 
   /* Backgrounds */
-  --bg-surface-hover: #f1f1f3;
-  --bg-surface-pressed: #f1f1f3;
+  /*--bg-surface-hover: #f1f1f3;*/
+  /*--bg-surface-pressed: #f1f1f3;*/
 
-  --bg-panel-hover: #f1f1f3;
-  --bg-panel-pressed: #f1f1f3;
+  /*--bg-panel-hover: #f1f1f3;*/
+  /*--bg-panel-pressed: #f1f1f3;*/
 
-  --bg-accent-soft-hover: #ebdbff;
-  --bg-accent-soft-pressed: #e8d6ff;
+  /*--bg-accent-soft-hover: #ebdbff;*/
+  /*--bg-accent-soft-pressed: #e8d6ff;*/
 
-  --bg-info-soft-hover: #e0f0ff;
-  --bg-info-soft-pressed: #d6ebff;
+  /*--bg-info-soft-hover: #e0f0ff;*/
+  /*--bg-info-soft-pressed: #d6ebff;*/
 
-  --bg-success-soft-hover: #e6faef;
-  --bg-success-soft-pressed: #e6faef;
+  /*--bg-success-soft-hover: #e6faef;*/
+  /*--bg-success-soft-pressed: #e6faef;*/
 
-  --bg-warning-soft-hover: #ffede0;
-  --bg-warning-soft-pressed: #ffeadb;
+  /*--bg-warning-soft-hover: #ffede0;*/
+  /*--bg-warning-soft-pressed: #ffeadb;*/
 
-  --bg-danger-soft-hover: #ffe5e8;
-  --bg-danger-soft-pressed: #ffdbdf;
+  /*--bg-danger-soft-hover: #ffe5e8;*/
+  /*--bg-danger-soft-pressed: #ffdbdf;*/
 
-  --bg-accent-bold-hover: var(--accent-9);
-  --bg-accent-bold-pressed: #4c00ad;
+  /*--bg-accent-bold-hover: var(--accent-9);*/
+  /*--bg-accent-bold-pressed: #4c00ad;*/
 
-  --bg-info-bold-hover: #0051f5;
-  --bg-info-bold-pressed: #0047d3;
+  /*--bg-info-bold-hover: #0051f5;*/
+  /*--bg-info-bold-pressed: #0047d3;*/
 
-  --bg-success-bold-hover: #0a7034;
-  --bg-success-bold-pressed: #09672f;
+  /*--bg-success-bold-hover: #0a7034;*/
+  /*--bg-success-bold-pressed: #09672f;*/
 
-  --bg-warning-bold-hover: #e55500;
-  --bg-warning-bold-pressed: #d14d00;
+  /*--bg-warning-bold-hover: #e55500;*/
+  /*--bg-warning-bold-pressed: #d14d00;*/
 
-  --bg-danger-bold-hover: #b80014;
-  --bg-danger-bold-pressed: #a30011;
+  /*--bg-danger-bold-hover: #b80014;*/
+  /*--bg-danger-bold-pressed: #a30011;*/
 }
 
 /* * * * * * * * * * * * * * * * * * * */
