@@ -19,7 +19,7 @@ export function AssociatesCard({
   const totalCount = stowersCount + buffersCount
 
   return (
-    <Card className="rounded-sm p-6">
+    <Card className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
           <h2 className="mb-1 text-sm font-medium">
@@ -34,7 +34,7 @@ export function AssociatesCard({
             {isStationWide && clusterCount && ` • ${clusterCount} clusters`}
           </p>
         </div>
-        <div className="rounded-sm">
+        <div className="rounded">
           <UsersThreeIcon weight="duotone" className="h-8 w-8" />
         </div>
       </div>
@@ -42,12 +42,12 @@ export function AssociatesCard({
       {/* Stacked Bar Chart */}
       <div className="space-y-2">
         <div className="flex items-center gap-2 text-xs">
-          <div className="bg-gray-9 h-2 w-2 rounded-sm"></div>
+          <div className="bg-gray-9 h-2 w-2 rounded"></div>
           <span className="text-cnt-secondary">Stowers</span>
-          <div className="bg-gray-5 ml-4 h-2 w-2 rounded-sm"></div>
+          <div className="bg-gray-5 ml-4 h-2 w-2 rounded"></div>
           <span className="text-cnt-secondary">Buffers</span>
         </div>
-        <div className="flex h-8 overflow-hidden rounded-sm bg-gray-100">
+        <div className="flex h-8 overflow-hidden rounded bg-gray-100">
           <div
             className="bg-gray-9 h-full"
             style={{

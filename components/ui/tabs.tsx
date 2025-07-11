@@ -60,8 +60,7 @@ function getVariantStyles(tabVariant: TabsListVariant) {
         // border hover
         'hover:border-gray-300 dark:hover:border-gray-400',
         // selected
-        'data-[state=active]:border-blue-500 data-[state=active]:text-blue-500',
-        'dark:data-[state=active]:border-blue-500 dark:data-[state=active]:text-blue-500',
+        'data-[state=active]:border-brd-accent data-[state=active]:text-cnt-accent',
         // disabled
         'data-disabled:pointer-events-none',
         'data-disabled:text-gray-300 dark:data-disabled:text-gray-700',
@@ -77,7 +76,7 @@ function getVariantStyles(tabVariant: TabsListVariant) {
         // ring
         'ring-transparent',
         // selected
-        'data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-sm',
+        'data-[state=active]:text-cnt-primary [--tw-shadow-color:var(--color-black-a4)] data-[state=active]:bg-white data-[state=active]:shadow-sm',
         'dark:data-[state=active]:bg-page dark:data-[state=active]:text-gray-50',
         // disabled
         'data-disabled:pointer-events-none data-disabled:text-gray-400 data-disabled:opacity-50 dark:data-disabled:text-gray-600',

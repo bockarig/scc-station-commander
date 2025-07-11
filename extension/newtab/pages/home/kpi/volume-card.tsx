@@ -25,7 +25,7 @@ export function VolumeCard({ current, capacity, trend, isStationWide = false }: 
   const trendData = getTrendData()
 
   return (
-    <Card className="rounded-sm p-6">
+    <Card className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
           <h2 className="mb-1 text-sm font-medium">
@@ -33,7 +33,7 @@ export function VolumeCard({ current, capacity, trend, isStationWide = false }: 
           </h2>
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold">{current.toLocaleString()}</span>
-            <span className={`rounded-sm px-2 py-1 text-sm font-medium ${trendData.color}`}>
+            <span className={`rounded px-2 py-1 text-sm font-medium ${trendData.color}`}>
               {trendData.percentage}
             </span>
           </div>
@@ -42,7 +42,7 @@ export function VolumeCard({ current, capacity, trend, isStationWide = false }: 
             {isStationWide && ' across all clusters'}
           </p>
         </div>
-        <div className="rounded-sm p-2">
+        <div className="rounded p-2">
           <PackageIcon weight="duotone" className="h-8 w-8" />
         </div>
       </div>

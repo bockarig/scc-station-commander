@@ -17,7 +17,7 @@ export function StowRateCard({
   totalStowers,
 }: StowRateCardProps) {
   return (
-    <Card className="rounded-sm p-6">
+    <Card className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
           <h2 className="mb-1 text-sm font-medium">
@@ -32,7 +32,7 @@ export function StowRateCard({
             {isStationWide && totalStowers && ` • ${totalStowers} stowers`}
           </p>
         </div>
-        <div className="rounded-sm p-2">
+        <div className="rounded p-2">
           <TrendUpIcon weight="duotone" className="h-8 w-8" />
         </div>
       </div>

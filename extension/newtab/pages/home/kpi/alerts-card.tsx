@@ -19,7 +19,7 @@ export function AlertsCard({
   const totalAlerts = belowTargetCount + needSupportCount
 
   return (
-    <Card className="rounded-sm p-6">
+    <Card className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <div>
           <h2 className="mb-1 text-sm font-medium">
@@ -44,21 +44,21 @@ export function AlertsCard({
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="bg-gray-5 h-2 w-2 rounded-sm"></div>
+            <div className="bg-gray-5 h-2 w-2 rounded"></div>
             <span className="text-cnt-secondary text-xs">Below Target</span>
           </div>
           <span className="text-cnt-primary text-sm font-medium">{belowTargetCount}</span>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="bg-gray-8 h-2 w-2 rounded-sm"></div>
+            <div className="bg-gray-8 h-2 w-2 rounded"></div>
             <span className="text-cnt-secondary text-xs">Need Support</span>
           </div>
           <span className="text-cnt-primary text-sm font-medium">{needSupportCount}</span>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="bg-gray-11 h-2 w-2 rounded-sm"></div>
+            <div className="bg-gray-11 h-2 w-2 rounded"></div>
             <span className="text-cnt-secondary text-xs">Performing Well</span>
           </div>
           <span className="text-cnt-primary text-sm font-medium">{performingWellCount}</span>
