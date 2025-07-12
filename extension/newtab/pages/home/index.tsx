@@ -515,7 +515,10 @@ export const Dashboard = () => {
           {/* Lane Views */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {currentData.clusters.map((cluster) => (
-              <Card key={cluster} className="bg-gray-3 border-brd-line">
+              <Card
+                key={cluster}
+                className="bg-gray-3 border-brd-line shadow-none inset-shadow-sm [--tw-inset-shadow-color:var(--color-black-a3)]"
+              >
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-xl">Cluster {cluster}</CardTitle>
